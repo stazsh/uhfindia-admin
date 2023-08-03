@@ -1,0 +1,33 @@
+#signin-image-box {
+  background-image: linear-gradient(
+      #00000077,
+      transparent,
+      transparent,
+      #00000077
+    ),
+    url(../assets/food.jpeg);
+  background-size: 150%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 10s ease-out;
+}
+
+.text-shadow {
+  text-shadow: #000 0px 0 15px 4px;
+}
+
+#crm {
+  /* background-image: url(../assets/CRM.png);
+  background-position: bottom -100px left 200px;
+  background-size: 150%;
+  background-repeat: no-repeat; */
+
+  opacity: 0;
+  transition: all;
+  transition-duration: 200ms;
+  background-image: linear-gradient(to top, #000000cc, #00000000);
+}
+
+#crm:hover {
+  opacity: 1;
+}
