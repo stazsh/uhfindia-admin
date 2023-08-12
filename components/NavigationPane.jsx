@@ -2,7 +2,7 @@ import {
   paneBottomElements,
   paneTopElements,
 } from "../ui-config/Navigation.config";
-import { FaChessBishop, FaChevronRight } from "react-icons/fa";
+import { FaChevronRight } from "react-icons/fa";
 import "../styles/navigation-pane.css";
 import { useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
@@ -113,10 +113,17 @@ function NavigationPane() {
               document.getElementsByClassName("pane-item-label");
             for (var i = 0; i < htmlCollection.length; i++)
               htmlCollection[i].classList.toggle("hidden");
+            document
+              .getElementById("pane-retractor")
+              .classList.toggle("rotatecw-180");
           }}
-          className="absolute opacity-0 group-hover:opacity-100 right-0 translate-x-1/2 cursor-pointer shadow-md shadow-[#00000030] shado ring-blue-500 hover:ring-4 transition duration-300 p-2 bg-white text-blue-600 top-1/2 -translate-y-1/2 rounded-full"
+          className="absolute right-0 translate-x-1/2 cursor-pointer shadow-md shadow-[#00000030] shado ring-blue-500 hover:ring-4 transition duration-300 p-2 bg-white text-blue-600 top-1/2 -translate-y-1/2 rounded-full"
         >
-          <FaChevronRight fontSize={10} />
+          <FaChevronRight
+            id="pane-retractor"
+            className="rotatecw-180"
+            fontSize={10}
+          />
         </div>
       </div>
 

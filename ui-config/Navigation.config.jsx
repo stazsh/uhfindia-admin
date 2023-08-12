@@ -6,6 +6,8 @@ import {
 } from "react-icons/lia";
 import { BiDonateHeart } from "react-icons/bi";
 import { VscFeedback } from "react-icons/vsc";
+import VApplications from "../applets/applications/VApplications";
+import Fundraising from "../applets/fundraising/Fundraising";
 
 export const paneTopElements = [
   {
@@ -19,7 +21,7 @@ export const paneTopElements = [
         navlink: function () {
           return "/dashboard/volunteer-applications/*";
         },
-        element: "volunteer appls.",
+        element: <VApplications />,
       },
     ],
   },
@@ -34,7 +36,7 @@ export const paneTopElements = [
         navlink: function () {
           return "/dashboard/fundraising/*";
         },
-        element: "fundraising",
+        element: <Fundraising />,
       },
     ],
   },

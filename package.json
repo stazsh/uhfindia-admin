@@ -1,5 +1,5 @@
 {
-  "name": "stt-crm",
+  "name": "uhf-dash",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.1",
     "@mui/x-date-pickers": "^6.10.1",
+    "axios": "^1.4.0",
     "comma-number": "^2.1.0",
     "dayjs": "^1.11.9",
     "framer-motion": "10.10.0",

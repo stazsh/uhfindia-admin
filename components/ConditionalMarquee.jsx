@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
-import { nbspString } from "../db/Clients.config";
+
+const nbspString = (
+  <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>
+);
 
 function ConditionalMarquee({ itemType, id, className, children }) {
   const [isTitleOverflowing, setIsTitleOveflowing] = useState(false);

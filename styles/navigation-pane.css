@@ -27,3 +27,7 @@
 #nav-pane {
   background-image: linear-gradient(to top, rgb(0, 140, 255), rgb(0, 49, 122));
 }
+
+.rotatecw-180 {
+  transform: rotate(180deg);
+}

@@ -9,12 +9,10 @@ function Page404() {
         <div className="text-[15rem] font-mono flex flex-col text-center">
           <div className="leading-none font-black text-primary">404</div>
           <div className="text-base">
-            ERROR! The resource you're looking for got
-            <br />
-            lost in the Corporate World :&lt;
-          </div>
-          <div className="text-sm mt-8 font-sans">
-            Licensed by <b>SmallTownTalks®</b>
+            WHOOPSIE-DAISY! Looks like we wandered off the compassion trail.
+            <br /> But fear not, our navigational compass is always set on
+            kindness.
+            <br /> Let's guide you back to the heart of empowerment together!
           </div>
         </div>
       </div>
@@ -22,7 +20,7 @@ function Page404() {
         <div className="w-[80%] flex flex-row justify-between items-center h-full">
           <div className="text-2xl whitespace-nowrap">
             <LiaFlaskSolid fontSize={26} className="inline-block mr-2" />
-            <span className="font-black">Lipsum</span>CRM
+            <span className="font-black">UHF</span>India.org
           </div>
           <div className="text-xs flex-grow px-16 text-center">
             "Ready to take your corporate game to the next level? Meet
@@ -34,7 +32,7 @@ function Page404() {
           <div className="text-sm whitespace-nowrap">
             Curated with ❤ by
             <br />
-            <span className="font-bold">World's Best Team 🤭</span>
+            <span className="font-bold">Team Cache Overflow</span>
           </div>
         </div>
       </div>
