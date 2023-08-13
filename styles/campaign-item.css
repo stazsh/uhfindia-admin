@@ -1,0 +1,13 @@
+.backdrop-filter-overlay-blue {
+  transition: all;
+  transition-duration: 300ms;
+  background-color: rgba(0, 32, 129, 0.8);
+}
+
+.backdrop-filter-overlay-blue:hover {
+  background-color: rgba(0, 26, 105, 0.8);
+}
+
+.text-shadow {
+  text-shadow: rgb(0, 0, 0) 0 0 3px;
+}

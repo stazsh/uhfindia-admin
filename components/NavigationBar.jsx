@@ -13,6 +13,7 @@ import NavigationBarProfile from "./NavigationBarProfile";
 import LOGO from "../assets/logo-min.png";
 import { BiGlobe } from "react-icons/bi";
 import { FiExternalLink } from "react-icons/fi";
+import { uid } from "uid";
 
 function NavigationBar({ children }) {
   return (
@@ -54,6 +55,7 @@ function NavigationBar({ children }) {
             { label: "EULA", hyperlink: "/AAAAAAAAAAAAAAAAAAAAAA" },
           ].map((item) => (
             <a
+              key={uid(10)}
               href={item.hyperlink}
               className="text-secondary-nav hover:border-b border-white group hover:text-primary-nav transition-colors duration-300"
             >

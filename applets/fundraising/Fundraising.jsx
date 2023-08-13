@@ -1,6 +1,6 @@
 import React from "react";
 import SectionHeader from "../../components/SectionHeader";
-import FundraiserCampaignsContainers from "./FundraiserCampaignsContainers";
+import FundraiserCampaignsContainer from "./FundraiserCampaignsContainers";
 
 function Fundraising() {
   return (
@@ -10,7 +10,7 @@ function Fundraising() {
         subtitle={"Manage all your fundraising campaigns from one place."}
       />
 
-      <FundraiserCampaignsContainers />
+      <FundraiserCampaignsContainer />
     </div>
   );
 }

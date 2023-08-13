@@ -142,7 +142,11 @@ function NavigationPane() {
             />
           ))}
         </Routes>
-        <div className="overflow-auto" style={{ height: "calc(100% - 4rem)" }}>
+        <div
+          id="dynamic-container"
+          className="overflow-auto"
+          style={{ height: "calc(100% - 4rem)" }}
+        >
           <Routes>
             {gRouteArray.map((i) => (
               <Route
