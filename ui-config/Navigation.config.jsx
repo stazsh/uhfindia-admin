@@ -8,6 +8,7 @@ import { BiDonateHeart } from "react-icons/bi";
 import { VscFeedback } from "react-icons/vsc";
 import VApplications from "../applets/applications/VApplications";
 import Fundraising from "../applets/fundraising/Fundraising";
+import Transactions from "../applets/transactions/Transactions";
 
 export const paneTopElements = [
   {
@@ -51,7 +52,7 @@ export const paneTopElements = [
         navlink: function () {
           return "/dashboard/transactions/*";
         },
-        element: "transactions",
+        element: <Transactions />,
       },
     ],
   },

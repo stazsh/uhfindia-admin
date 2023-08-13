@@ -1,6 +1,7 @@
+import React from "react";
 import { BiChevronDown } from "react-icons/bi";
 
-function VAppListHeaderItem({ width, label }) {
+function TxListHeaderItem({ label, width }) {
   const chevronDown = <BiChevronDown fontSize={15} className="inline-block" />;
 
   return (
@@ -17,4 +18,4 @@ function VAppListHeaderItem({ width, label }) {
   );
 }
 
-export default VAppListHeaderItem;
+export default TxListHeaderItem;

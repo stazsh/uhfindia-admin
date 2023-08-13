@@ -10,11 +10,29 @@ export function Approved() {
   );
 }
 
+export function Completed() {
+  return (
+    <div className="font-semibold h-fit w-fit px-2 py-0.5 flex place-items-center rounded-full text-green-500 bg-green-50 text-xs">
+      <RiCheckboxCircleFill fontSize={15} className="inline-block mr-2" />
+      <span>Completed</span>
+    </div>
+  );
+}
+
 export function Rejected() {
   return (
     <div className="font-semibold h-fit w-fit px-2 py-0.5 flex place-items-center rounded-full text-red-500 bg-red-50 text-xs">
       <RiCloseCircleFill fontSize={15} className="inline-block mr-2" />
       <span>Rejected</span>
+    </div>
+  );
+}
+
+export function Failed() {
+  return (
+    <div className="font-semibold h-fit w-fit px-2 py-0.5 flex place-items-center rounded-full text-red-500 bg-red-50 text-xs">
+      <RiCloseCircleFill fontSize={15} className="inline-block mr-2" />
+      <span>Failed</span>
     </div>
   );
 }
