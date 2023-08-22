@@ -9,6 +9,10 @@ import { VscFeedback } from "react-icons/vsc";
 import VApplications from "../applets/applications/VApplications";
 import Fundraising from "../applets/fundraising/Fundraising";
 import Transactions from "../applets/transactions/Transactions";
+import UCommunity from "../applets/users/UCommunity";
+import UVolunteers from "../applets/users/UVolunteers";
+import UAdmininstrators from "../applets/users/UAdmininstrators";
+import Feedback from "../applets/feedback/Feedback";
 
 export const paneTopElements = [
   {
@@ -63,25 +67,25 @@ export const paneTopElements = [
     navlink: "/dashboard/users",
     tabs: [
       {
-        title: "Extra-organisational",
+        title: "Community",
         navlink: function () {
           return "/dashboard/users/extra/*";
         },
-        element: "extraorganisationals list",
+        element: <UCommunity />,
       },
       {
         title: "Volunteers",
         navlink: function () {
           return "/dashboard/users/volunteers/*";
         },
-        element: "volunteer list",
+        element: <UVolunteers />,
       },
       {
         title: "Administrators",
         navlink: function () {
           return "/dashboard/users/administrators/*";
         },
-        element: "admin list",
+        element: <UAdmininstrators />,
       },
     ],
   },
@@ -96,7 +100,7 @@ export const paneTopElements = [
         navlink: function () {
           return "/dashboard/feedback/*";
         },
-        element: <div>"feedback"</div>,
+        element: <Feedback />,
       },
     ],
   },

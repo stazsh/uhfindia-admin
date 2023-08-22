@@ -6,12 +6,13 @@ const styleGrey =
   "bg-[#eeeeee] hover:bg-neutral-300 transition-colors text-primary";
 const styleStuti = "";
 
-function NativeButton({ type, IconType, text }) {
+function NativeButton({ type, IconType, text, onClick }) {
   type = String(type).toLowerCase();
 
   return (
     <button
-      className={`outline-none px-2 py-1 font-bold rounded-lg border-none flex place-items-center ${
+      onClick={onClick}
+      className={`outline-none px-2 py-1 font-bold whitespace-nowrap rounded-lg border-none flex place-items-center ${
         type === "blue"
           ? styleBlue
           : type === "green"

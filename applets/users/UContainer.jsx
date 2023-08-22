@@ -1,27 +1,25 @@
 import React from "react";
-import { transactionsList } from "../../static/TransactionsList";
-import { IoPeopleOutline } from "react-icons/io5";
+import { uList } from "../../static/UList";
+import UHeaderItem from "./UHeaderItem";
 import SubsectionHeader from "../../components/SubsectionHeader";
-import TxListHeaderItem from "./TxListHeaderItem";
-import TxItem from "./TxItem";
-import { getColumnConfig } from "../../ui-config/TxTable.config";
+import { IoPeopleOutline } from "react-icons/io5";
+import { getColumnConfig } from "../../ui-config/UTable.config";
+import UItem from "./UItem";
 import { uid } from "uid";
 
-function TransactionsContainer({ className }) {
-  let txList = transactionsList;
-
+function UContainer({ className, onlyRenderRole }) {
   return (
     <div className={`flex-grow flex flex-col w-full ${className}`}>
       <div className="border border-boundary rounded-xl flex flex-col flex-grow">
         <SubsectionHeader
           icon={<IoPeopleOutline fontSize={20} />}
-          label={"Transactions"}
+          label={String(onlyRenderRole).toLocaleUpperCase()}
           className="p-5"
         />
 
         <div className="list-header-container shrink-0 text-primary border-b h-12 divide-x flex flex-row border-boundary px-5 py-2 text-sm font-bold">
           {getColumnConfig().map((item) => (
-            <TxListHeaderItem key={item.label} {...item} />
+            <UHeaderItem key={item.label} {...item} />
           ))}
         </div>
 
@@ -30,9 +28,13 @@ function TransactionsContainer({ className }) {
             id="list-parent"
             className="absolute w-full h-full divide-y overflow-auto px-5"
           >
-            {txList.map((item) => (
-              <TxItem key={uid(10)} {...item} />
-            ))}
+            {uList.map((item) =>
+              item.role === onlyRenderRole ? (
+                <UItem key={uid(10)} {...item} />
+              ) : (
+                <></>
+              )
+            )}
           </div>
         </div>
       </div>
@@ -40,4 +42,4 @@ function TransactionsContainer({ className }) {
   );
 }
 
-export default TransactionsContainer;
+export default UContainer;

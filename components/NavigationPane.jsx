@@ -134,8 +134,8 @@ function NavigationPane() {
         <Routes>
           {gRouteArray.map((i) => (
             <Route
-              key={i.path.split("/").slice(2, -1).join("/")}
-              path={i.path.split("/").slice(2, -1).join("/")}
+              key={i.path.split("/").slice(2).join("/")}
+              path={i.path.split("/").slice(2).join("/")}
               element={
                 <TabBar tabs={i.tabs} activeTabTitle={i.activeTabTitle} />
               }
@@ -150,8 +150,8 @@ function NavigationPane() {
           <Routes>
             {gRouteArray.map((i) => (
               <Route
-                key={i.path.split("/").slice(2, -1).join("/")}
-                path={i.path.split("/").slice(2, -1).join("/")}
+                key={i.path.split("/").slice(2).join("/")}
+                path={i.path.split("/").slice(2).join("/")}
                 element={i.element}
               />
             ))}
