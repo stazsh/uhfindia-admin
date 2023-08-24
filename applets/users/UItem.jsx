@@ -21,7 +21,7 @@ export default function UItem(listItem) {
         >
           <div className="flex flex-row place-items-center">
             <img
-              src={listItem.pfp}
+              src={listItem.profurl}
               alt="User PFP"
               className="h-10 mr-5 aspect-square border-2 transition-all group-hover:border-4 border-blue-300 group-hover:border-blue-600 rounded-full object-cover"
             />
@@ -81,7 +81,7 @@ export default function UItem(listItem) {
       </div>
 
       <div
-        // # of donations
+        // donations
         style={{ width: `${columnConfig[4].width}%` }}
         className="flex flex-col justify-center px-4 font-medium text-base"
       >
@@ -90,7 +90,7 @@ export default function UItem(listItem) {
           id={listItem._id}
           key={uid(10)}
         >
-          {listItem[columnConfig[4].fieldName].length}
+          ₹ {listItem[columnConfig[4].fieldName]}
         </ConditionalMarquee>
       </div>
 

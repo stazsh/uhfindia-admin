@@ -8,6 +8,9 @@ import Page404 from "./404/Page404";
 import SignIn from "./session/SignIn";
 import StaticNavigationBar from "./components/StaticNavigationBar";
 import { UserContext } from "./context/UserContext";
+import { DialogContext } from "./context/DialogContext";
+import { DialogContent } from "@mui/material";
+import { faker } from "@faker-js/faker";
 
 function App() {
   const navigate = useNavigate();
@@ -19,6 +22,8 @@ function App() {
     profurl: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
     role: "NA",
   });
+
+  const [showDialog, setShowDialog] = useState(null);
 
   useEffect(() => {
     const goToSignin = () => navigate("/session/signin");
@@ -55,40 +60,42 @@ function App() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <UserContext.Provider value={{ userContextObj, setUserContextObj }}>
-        <Routes>
-          <Route
-            path="/dashboard/*"
-            element={
-              <NavigationBar>
-                <NavigationPane />
-              </NavigationBar>
-            }
-          />
-          <Route
-            path="/session/*"
-            element={
-              <Routes>
-                <Route
-                  path="/signin"
-                  element={
-                    <StaticNavigationBar>
-                      <SignIn />
-                    </StaticNavigationBar>
-                  }
-                />
-                {/* ... */}
-              </Routes>
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <NavigationBar>
-                <Page404 />
-              </NavigationBar>
-            }
-          />
-        </Routes>
+        <DialogContext.Provider value={{ showDialog, setShowDialog }}>
+          <Routes>
+            <Route
+              path="/dashboard/*"
+              element={
+                <NavigationBar>
+                  <NavigationPane />
+                </NavigationBar>
+              }
+            />
+            <Route
+              path="/session/*"
+              element={
+                <Routes>
+                  <Route
+                    path="/signin"
+                    element={
+                      <StaticNavigationBar>
+                        <SignIn />
+                      </StaticNavigationBar>
+                    }
+                  />
+                  {/* ... */}
+                </Routes>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <NavigationBar>
+                  <Page404 />
+                </NavigationBar>
+              }
+            />
+          </Routes>
+        </DialogContext.Provider>
       </UserContext.Provider>
     </LocalizationProvider>
   );

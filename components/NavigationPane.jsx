@@ -4,9 +4,19 @@ import {
 } from "../ui-config/Navigation.config";
 import { FaChevronRight } from "react-icons/fa";
 import "../styles/navigation-pane.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import TabBar from "./TabBar";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Typography from "@mui/material/Typography";
+import { DialogContext } from "../context/DialogContext";
+import { Button } from "@mui/material";
+import { uid } from "uid";
 
 const homeId = "pane-applications";
 
@@ -14,6 +24,8 @@ function NavigationPane() {
   const navigate = useNavigate();
   const location = useLocation();
   const [paneSelection, setPaneSelection] = useState(homeId);
+
+  const { showDialog, setShowDialog } = useContext(DialogContext);
 
   useEffect(() => {
     for (var k = 0; k < gRouteArray.length; k++) {
@@ -156,6 +168,22 @@ function NavigationPane() {
               />
             ))}
           </Routes>
+        </div>
+        <div>
+          <Dialog open={Boolean(showDialog)}>
+            {Boolean(showDialog) ? (
+              <DialogContent>
+                {showDialog.message}
+                {showDialog.buttons.map((button) => (
+                  <DialogActions key={uid(10)}>
+                    <Button autoFocus onClick={button.onClick}>
+                      {button.label}
+                    </Button>
+                  </DialogActions>
+                ))}
+              </DialogContent>
+            ) : null}
+          </Dialog>
         </div>
       </div>
     </div>

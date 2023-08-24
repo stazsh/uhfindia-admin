@@ -1,13 +1,49 @@
-import React from "react";
-import { uList } from "../../static/UList";
+import React, { useContext, useEffect, useState } from "react";
 import UHeaderItem from "./UHeaderItem";
 import SubsectionHeader from "../../components/SubsectionHeader";
 import { IoPeopleOutline } from "react-icons/io5";
 import { getColumnConfig } from "../../ui-config/UTable.config";
+import { axiosInstance } from "../../api/axiosConfig";
 import UItem from "./UItem";
 import { uid } from "uid";
+import { UTIL_showAlertDialog } from "../../utils/muiDialogUtils";
+import { DialogContext } from "../../context/DialogContext";
+import { BiErrorCircle } from "react-icons/bi";
 
 function UContainer({ className, onlyRenderRole }) {
+  const [uList, setUList] = useState([]);
+  const { setShowDialog } = useContext(DialogContext);
+
+  useEffect(() => {
+    async function getUsers() {
+      try {
+        const res = await axiosInstance.get("/users", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
+          },
+          params: {
+            filter: {
+              role: onlyRenderRole,
+            },
+          },
+        });
+        console.log(res.data);
+        setUList(res.data.payload);
+      } catch (e) {
+        console.error(e);
+        UTIL_showAlertDialog(
+          setShowDialog,
+          <>
+            <BiErrorCircle fontSize={30} className="inline-block mr-4" />
+            <span>An unexpected error occured</span>
+          </>
+        );
+      }
+    }
+
+    getUsers();
+  }, []);
+
   return (
     <div className={`flex-grow flex flex-col w-full ${className}`}>
       <div className="border border-boundary rounded-xl flex flex-col flex-grow">

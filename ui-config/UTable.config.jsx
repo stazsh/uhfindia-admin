@@ -20,7 +20,7 @@ const columnConfiguration = [
     width: 10,
   },
   {
-    label: "# of donations",
+    label: "Amount donated",
     fieldName: "donations",
     width: 8,
   },

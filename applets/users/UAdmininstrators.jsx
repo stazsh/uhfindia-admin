@@ -37,7 +37,7 @@ function UAdmininstrators() {
         }
       />
 
-      <Route path="/create" element={<UForm />} />
+      <Route path="/create" element={<UForm createRole={"admin"} />} />
     </Routes>
   );
 }
