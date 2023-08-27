@@ -21,7 +21,7 @@ const columnConfiguration = [
   },
   {
     label: "Date of Posting (IST)",
-    fieldName: "posted_at",
+    fieldName: "created_at",
     width: 10,
   },
   {

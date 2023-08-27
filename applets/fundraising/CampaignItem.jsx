@@ -15,9 +15,8 @@ function CampaignItem({
   target_amount,
   current_amount,
   description,
+  onClick,
 }) {
-  images = images.sort(() => 0.5 - Math.random());
-
   const [themeColour, setThemeColour] = useState(
     (() => {
       const colorArray = [
@@ -33,31 +32,10 @@ function CampaignItem({
   return (
     <div
       className={`rounded-2xl overflow-hidden bg-neutral-50 group duration-300 transition-all shadow-xl cursor-pointer hover:ring-8 ring-blue-200 hover:-translate-y-1`}
+      onClick={onClick}
     >
       <div className="w-full relative">
-        <Carousel
-          autoPlay
-          axis="vertical"
-          interval={8000 - Math.floor(5000 * Math.random())}
-          showThumbs={false}
-          ariaLabel={false}
-          showStatus={false}
-          showIndicators={false}
-          labels={false}
-          infiniteLoop
-          showArrows={false}
-          className="w-full relative"
-          key={uid(10)}
-        >
-          {images.map((url) => (
-            <img
-              key={uid(10)}
-              src={url}
-              alt="Campaign poster"
-              className="h-60 object-cover transition-all duration-300 saturate-0 brightness-75"
-            />
-          ))}
-        </Carousel>
+        <div className="h-64" />
         <div
           className="flex flex-col justify-between text-white transition-all duration-300 p-5 absolute top-0 left-o w-full h-full"
           style={{

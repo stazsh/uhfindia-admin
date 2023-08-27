@@ -8,7 +8,10 @@ function FeedbackItem(listItem) {
   const columnConfig = getColumnConfig();
 
   return (
-    <div className="w-full flex flex-row py-3 cursor-pointer hover:bg-slate-100 text-tertiary group hover:text-primary transition-colors duration-200">
+    <div
+      onClick={listItem.onClick}
+      className="w-full flex flex-row py-3 cursor-pointer hover:bg-slate-100 text-tertiary group hover:text-primary transition-colors duration-200"
+    >
       <div
         // pfp & name
         style={{ width: `${columnConfig[0].width}%` }}

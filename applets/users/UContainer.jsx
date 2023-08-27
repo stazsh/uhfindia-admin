@@ -9,10 +9,12 @@ import { uid } from "uid";
 import { UTIL_showAlertDialog } from "../../utils/muiDialogUtils";
 import { DialogContext } from "../../context/DialogContext";
 import { BiErrorCircle } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
 function UContainer({ className, onlyRenderRole }) {
   const [uList, setUList] = useState([]);
   const { setShowDialog } = useContext(DialogContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getUsers() {
@@ -66,7 +68,15 @@ function UContainer({ className, onlyRenderRole }) {
           >
             {uList.map((item) =>
               item.role === onlyRenderRole ? (
-                <UItem key={uid(10)} {...item} />
+                <UItem
+                  onClick={() =>
+                    navigate(
+                      "/dashboard/users/" + onlyRenderRole + "/" + item._id
+                    )
+                  }
+                  key={uid(10)}
+                  {...item}
+                />
               ) : (
                 <></>
               )

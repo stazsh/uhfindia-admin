@@ -1,13 +1,52 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SubsectionHeader from "../../components/SubsectionHeader";
 import { IoPeopleOutline } from "react-icons/io5";
 import { getColumnConfig } from "../../ui-config/Feedback.config";
 import FeedbackHeaderItem from "./FeedbackHeaderItem";
-import { feedbacksList } from "../../static/FeedbacksList";
 import FeedbackItem from "./FeedbackItem";
 import { uid } from "uid";
+import { useNavigate } from "react-router-dom";
+import {
+  UTIL_hideDialog,
+  UTIL_showAlertDialog,
+  UTIL_showLoadingDialog,
+} from "../../utils/muiDialogUtils";
+import { DialogContext } from "../../context/DialogContext";
+import { axiosInstance } from "../../api/axiosConfig";
+import { BiErrorCircle } from "react-icons/bi";
 
 function FeedbackContainer({ className }) {
+  const navigate = useNavigate();
+  const { setShowDialog } = useContext(DialogContext);
+  const [feedbacksList, setFeedbackList] = useState([]);
+
+  useEffect(() => {
+    async function getFeedbackList() {
+      try {
+        UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
+        const res = await axiosInstance.get("/feedback", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
+          },
+        });
+
+        UTIL_hideDialog(setShowDialog);
+        setFeedbackList(res.data.payload);
+      } catch (e) {
+        console.error(e);
+        UTIL_showAlertDialog(
+          setShowDialog,
+          <>
+            <BiErrorCircle fontSize={30} className="inline-block mr-4" />
+            <span>An unexpected error occured</span>
+          </>
+        );
+      }
+    }
+
+    getFeedbackList();
+  }, []);
+
   return (
     <div className={`flex-grow flex flex-col w-full ${className}`}>
       <div className="border border-boundary rounded-xl flex flex-col flex-grow">
@@ -29,7 +68,13 @@ function FeedbackContainer({ className }) {
             className="absolute w-full h-full divide-y overflow-auto px-5"
           >
             {feedbacksList.map((item) => {
-              return <FeedbackItem key={uid(10)} {...item} />;
+              return (
+                <FeedbackItem
+                  key={uid(10)}
+                  onClick={() => navigate(`/dashboard/feedback/${item._id}`)}
+                  {...item}
+                />
+              );
             })}
           </div>
         </div>

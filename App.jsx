@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import NavigationPane from "./components/NavigationPane";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -9,14 +9,12 @@ import SignIn from "./session/SignIn";
 import StaticNavigationBar from "./components/StaticNavigationBar";
 import { UserContext } from "./context/UserContext";
 import { DialogContext } from "./context/DialogContext";
-import { DialogContent } from "@mui/material";
-import { faker } from "@faker-js/faker";
+import { axiosInstance } from "./api/axiosConfig";
 
 function App() {
   const navigate = useNavigate();
 
   const [userContextObj, setUserContextObj] = useState({
-    org: "",
     email: "",
     name: "User",
     profurl: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
@@ -33,19 +31,14 @@ function App() {
 
       if (refreshToken) {
         try {
-          const res = await axios({
-            method: "get",
-            url: "https://lipsum.jayantapandit.me/v1/crm/session/reftoken",
+          const res = await axiosInstance.get("/session/reftoken", {
             headers: {
               Authorization: `Bearer ${refreshToken}`,
             },
           });
-
-          if (res.data.success) {
-            setUserContextObj(res.data.user_obj);
-            localStorage.setItem("uhf_jwt", res.data.jwt);
-            navigate("/dashboard/home");
-          }
+          setUserContextObj(res.data.user_obj);
+          localStorage.setItem("uhf_jwt", res.data.jwt);
+          navigate("/dashboard/home");
         } catch (e) {
           goToSignin();
         }
@@ -54,7 +47,7 @@ function App() {
       }
     };
 
-    // runFirst();
+    runFirst();
   }, []);
 
   return (

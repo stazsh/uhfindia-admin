@@ -11,6 +11,7 @@ import "../styles/signin.css";
 import { miscNetError } from "../utils/miscNetworkError";
 import { UserContext } from "../context/UserContext";
 import { CgGlobeAlt } from "react-icons/cg";
+import { axiosInstance } from "../api/axiosConfig";
 
 function SigninBox() {
   const emailRef = useRef();
@@ -24,25 +25,20 @@ function SigninBox() {
     try {
       setLoginLoadState(true);
 
-      const res = await axios({
-        method: "post",
-        url: "https://lipsum.jayantapandit.me/v1/crm/session/login",
-        data: {
-          email: emailRef.current.value,
-          password: pwdRef.current.value,
-        },
+      const res = await axiosInstance.post("/session/login", {
+        email: emailRef.current.value,
+        password: pwdRef.current.value,
       });
 
-      if (res.data.success) {
-        setUserContextObj(res.data.user_obj);
-        localStorage.setItem("crm_jwt", res.data.jwt);
-        localStorage.setItem("crm_jwt_ref", res.data.jwt_refresh);
+      setUserContextObj(res.data.user_obj);
+      localStorage.setItem("uhf_jwt", res.data.jwt);
+      localStorage.setItem("uhf_jwt_ref", res.data.jwt_refresh);
 
-        // TODO: timeout added for demonstrative purposes only, remove in production
-        setTimeout(() => navigate("/dashboard/home"), 3000);
-      }
+      // TODO: timeout added for demonstrative purposes only, remove in production
+      setTimeout(() => navigate("/dashboard/home"), 3000);
     } catch (err) {
       console.error(err);
+      setLoginLoadState(false);
 
       if (isAxiosError(err)) {
         const statusCode = err.response.status;

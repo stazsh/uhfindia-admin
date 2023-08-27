@@ -2,7 +2,6 @@ import { faker } from "@faker-js/faker/locale/en_IN";
 
 export const uList = [
   {
-    _id: "615a7ea6f7fcde1f72d2d6fe",
     email: "grace@example.com",
     phone: faker.phone.number(),
     password: "hashed_password_here",
@@ -14,7 +13,6 @@ export const uList = [
     updated_at: "2023-08-30T10:00:00Z",
   },
   {
-    _id: "615a7ea6f7fcde1f72d2d6ff",
     email: "charlie@example.com",
     phone: faker.phone.number(),
     password: "hashed_password_here",
@@ -26,7 +24,6 @@ export const uList = [
     updated_at: "2023-08-31T12:30:00Z",
   },
   {
-    _id: "615a7ea6f7fcde1f72d2d700",
     email: "lucas@example.com",
     phone: faker.phone.number(),
     password: "hashed_password_here",
@@ -38,7 +35,6 @@ export const uList = [
     updated_at: "2023-09-01T14:15:00Z",
   },
   {
-    _id: "615a7ea6f7fcde1f72d2d701",
     email: "mia@example.com",
     phone: faker.phone.number(),
     password: "hashed_password_here",
@@ -50,7 +46,6 @@ export const uList = [
     updated_at: "2023-09-02T16:40:00Z",
   },
   {
-    _id: "615a7ea6f7fcde1f72d2d702",
     email: "ethan@example.com",
     phone: faker.phone.number(),
     password: "hashed_password_here",
@@ -62,7 +57,6 @@ export const uList = [
     updated_at: "2023-09-03T18:50:00Z",
   },
   {
-    _id: "615a7ea6f7fcde1f72d2d6f5",
     email: "emily@example.com",
     phone: faker.phone.number(),
     password: "hashed_password_here",

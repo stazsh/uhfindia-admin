@@ -69,21 +69,21 @@ export const paneTopElements = [
       {
         title: "Community",
         navlink: function () {
-          return "/dashboard/users/extra/*";
+          return "/dashboard/users/community/*";
         },
         element: <UCommunity />,
       },
       {
         title: "Volunteers",
         navlink: function () {
-          return "/dashboard/users/volunteers/*";
+          return "/dashboard/users/volunteer/*";
         },
         element: <UVolunteers />,
       },
       {
         title: "Administrators",
         navlink: function () {
-          return "/dashboard/users/administrators/*";
+          return "/dashboard/users/admin/*";
         },
         element: <UAdmininstrators />,
       },

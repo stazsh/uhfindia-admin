@@ -5,8 +5,51 @@ import ApplicationListItem from "./ApplicationListItem";
 import { vAppList } from "../../static/VAppList";
 import VAppListHeaderItem from "./VAppListHeaderItem";
 import { uid } from "uid";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { DialogContext } from "../../context/DialogContext";
+import {
+  UTIL_hideDialog,
+  UTIL_showAlertDialog,
+  UTIL_showLoadingDialog,
+} from "../../utils/muiDialogUtils";
+import { axiosInstance } from "../../api/axiosConfig";
+import { BiErrorCircle } from "react-icons/bi";
 
 function VAppListContainer({ className }) {
+  const navigate = useNavigate();
+  const { setShowDialog } = useContext(DialogContext);
+  const [applicationList, setApplicationList] = useState([]);
+
+  useEffect(() => {
+    async function getVApplications() {
+      try {
+        UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
+        const res = await axiosInstance.get("/vapplications", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
+          },
+        });
+
+        console.log(res.data.payload);
+
+        UTIL_hideDialog(setShowDialog);
+        setApplicationList(res.data.payload);
+      } catch (e) {
+        console.error(e);
+        UTIL_showAlertDialog(
+          setShowDialog,
+          <>
+            <BiErrorCircle fontSize={30} className="inline-block mr-4" />
+            <span>An unexpected error occured</span>
+          </>
+        );
+      }
+    }
+
+    getVApplications();
+  }, []);
+
   return (
     <div className={`flex-grow flex flex-col w-full ${className}`}>
       <div className="border border-boundary rounded-xl flex flex-col flex-grow">
@@ -27,8 +70,14 @@ function VAppListContainer({ className }) {
             id="list-parent"
             className="absolute w-full h-full divide-y overflow-auto px-5"
           >
-            {vAppList.map((item) => (
-              <ApplicationListItem key={uid(10)} {...item} />
+            {applicationList.map((item) => (
+              <ApplicationListItem
+                key={uid(10)}
+                {...item}
+                onClick={() =>
+                  navigate("/dashboard/volunteer-applications/" + item._id)
+                }
+              />
             ))}
           </div>
         </div>

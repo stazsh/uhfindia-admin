@@ -2,12 +2,12 @@ const columnConfiguration = [
   {
     label: "Name",
     fieldName: "user_name",
-    width: 8,
+    width: 13,
   },
   {
     label: "Email",
     fieldName: "user_email",
-    width: 8,
+    width: 10,
   },
   {
     label: "Comment",

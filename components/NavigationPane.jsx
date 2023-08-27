@@ -8,24 +8,26 @@ import { useContext, useEffect, useState } from "react";
 import { Route, useNavigate, Routes, useLocation } from "react-router-dom";
 import TabBar from "./TabBar";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Typography from "@mui/material/Typography";
 import { DialogContext } from "../context/DialogContext";
 import { Button } from "@mui/material";
 import { uid } from "uid";
+import { UserContext } from "../context/UserContext";
 
 const homeId = "pane-applications";
+const homeIdVolunteer = "pane-fundraising";
 
 function NavigationPane() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [paneSelection, setPaneSelection] = useState(homeId);
 
-  const { showDialog, setShowDialog } = useContext(DialogContext);
+  const { showDialog } = useContext(DialogContext);
+  const { userContextObj } = useContext(UserContext);
+
+  const [paneSelection, setPaneSelection] = useState(
+    userContextObj.role === "volunteer" ? homeIdVolunteer : homeId
+  );
 
   useEffect(() => {
     for (var k = 0; k < gRouteArray.length; k++) {
@@ -44,7 +46,14 @@ function NavigationPane() {
 
     for (var i = 0; i < arr.length; i++)
       for (var j = 0; j < arr[i].length; j++)
-        for (var k = 0; k < arr[i][j].tabs.length; k++)
+        for (var k = 0; k < arr[i][j].tabs.length; k++) {
+          if (
+            arr[i][j].id === "pane-users" &&
+            userContextObj.role === "volunteer"
+          ) {
+            continue;
+          }
+
           routeArray.push({
             id: arr[i][j].id,
             parentPath: arr[i][j].navlink,
@@ -53,6 +62,7 @@ function NavigationPane() {
             activeTabTitle: arr[i][j].tabs[k].title,
             element: arr[i][j].tabs[k].element,
           });
+        }
 
     return routeArray;
   })();
@@ -73,28 +83,33 @@ function NavigationPane() {
     <div className="flex flex-row h-full w-full">
       <div
         id="nav-pane"
-        className="relative flex-shrink-0 pt-1.5 flex group flex-col border-r border-boundary justify-between resize-x h-full box-border w-fit px-3 transition"
+        className="relative flex-shrink-0 pt-1.5 flex group flex-col border-r border-boundary justify-between resize-x h-full box-border w-[250px] px-3 transition"
       >
         <div className="space-y-3 pt-2">
-          {paneTopElements.map((i) => (
-            <div
-              key={i.id}
-              id={i.id}
-              onClick={(e) => {
-                navigate(
-                  i.tabs[0]
-                    .navlink()
-                    .substring(0, i.tabs[0].navlink().length - 2)
-                );
-              }}
-              className="text-white flex flex-row place-items-center box-border outline-none hover:bg-[#ffffff44] active:bg-slate-200 active:text-black transition-colors cursor-pointer p-3 rounded-xl"
-            >
-              {i.icon}
-              <div className="pl-3 capitalize pr-2 pane-item-label text-sm text-inherit font-semibold">
-                {i.label}
+          {paneTopElements.map((i) =>
+            userContextObj.role === "volunteer" &&
+            (i.id === "pane-users" || i.id === "pane-applications") ? (
+              <></>
+            ) : (
+              <div
+                key={i.id}
+                id={i.id}
+                onClick={(e) => {
+                  navigate(
+                    i.tabs[0]
+                      .navlink()
+                      .substring(0, i.tabs[0].navlink().length - 2)
+                  );
+                }}
+                className="text-white flex flex-row place-items-center box-border outline-none hover:bg-[#ffffff44] active:bg-slate-200 active:text-black transition-colors cursor-pointer p-3 rounded-xl"
+              >
+                {i.icon}
+                <div className="pl-3 capitalize pr-2 pane-item-label text-sm text-inherit font-semibold">
+                  {i.label}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
 
         <div className="space-y-3 pb-2">

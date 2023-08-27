@@ -11,8 +11,11 @@ function NativeButton({ type, IconType, text, onClick }) {
 
   return (
     <button
-      onClick={onClick}
-      className={`outline-none px-2 py-1 font-bold whitespace-nowrap rounded-lg border-none flex place-items-center ${
+      onClick={async (e) => {
+        e.preventDefault();
+        await onClick();
+      }}
+      className={`outline-none px-3 py-2 font-bold whitespace-nowrap rounded-lg border-none flex place-items-center ${
         type === "blue"
           ? styleBlue
           : type === "green"

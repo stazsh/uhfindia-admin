@@ -14,7 +14,10 @@ function ApplicationListItem(listItem) {
   };
 
   return (
-    <div className="w-full flex flex-row h-16 cursor-pointer hover:bg-slate-100 text-tertiary group hover:text-primary transition-colors duration-200">
+    <div
+      onClick={listItem.onClick ? listItem.onClick : null}
+      className="w-full flex flex-row h-16 cursor-pointer hover:bg-slate-100 text-tertiary group hover:text-primary transition-colors duration-200"
+    >
       <div
         // VApp ID `_id`
         style={{ width: `${columnConfig[0].width}%` }}

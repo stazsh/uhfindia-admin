@@ -20,7 +20,7 @@ function UForm({ createRole }) {
   const { setShowDialog } = useContext(DialogContext);
 
   const RJSFSchema = {
-    title: "Create admininistrator's account",
+    title: "Create " + createRole + "'s account",
     type: "object",
     properties: {
       name: {
@@ -79,7 +79,7 @@ function UForm({ createRole }) {
     <div className="flex flex-row justify-center">
       <div className="p-8 self-center w-full max-w-[1000px] h-full">
         <Form
-          autoComplete="false"
+          autoComplete={"false"}
           ref={formRef}
           schema={RJSFSchema}
           uiSchema={uiSchema}
@@ -90,7 +90,7 @@ function UForm({ createRole }) {
                 setShowDialog,
                 "Creating administrator's account..."
               );
-              const res = await axiosInstance.post(
+              await axiosInstance.post(
                 "/users",
                 formRef.current.state.formData,
                 {
@@ -112,8 +112,9 @@ function UForm({ createRole }) {
                   </>,
                   () => navigate(-1)
                 );
-              }, 1000);
+              }, 343);
             } catch (e) {
+              console.error(e);
               UTIL_showAlertDialog(
                 setShowDialog,
                 <>

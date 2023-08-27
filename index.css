@@ -45,3 +45,7 @@ body,
   width: 0;
   height: 0;
 }
+
+.dark-text {
+  color: rgb(53, 53, 53) !important;
+}

@@ -5,6 +5,7 @@ import NativeButton from "../../components/NativeButton";
 import { FiPlus } from "react-icons/fi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import UForm from "./UForm";
+import { UFormUpdate } from "./UFormUpdate";
 
 function UAdmininstrators() {
   const navigate = useNavigate();
@@ -23,11 +24,9 @@ function UAdmininstrators() {
               <div>
                 <NativeButton
                   IconType={FiPlus}
-                  text={"Create new admin"}
+                  text={"Add new admin"}
                   type={"green"}
-                  onClick={() =>
-                    navigate("/dashboard/users/administrators/create")
-                  }
+                  onClick={() => navigate("/dashboard/users/admin/create")}
                 />
               </div>
             </div>
@@ -38,6 +37,7 @@ function UAdmininstrators() {
       />
 
       <Route path="/create" element={<UForm createRole={"admin"} />} />
+      <Route path="/:id" element={<UFormUpdate updateRole={"admin"} />} />
     </Routes>
   );
 }
