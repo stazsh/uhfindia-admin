@@ -2,7 +2,7 @@ import { Checkbox } from "@mui/material";
 import React, { useContext, useRef, useState } from "react";
 import { HiOutlineEyeOff } from "react-icons/hi";
 import { VscDebugRestart } from "react-icons/vsc";
-import axios, { isAxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
 import { FiLogIn } from "react-icons/fi";
@@ -44,12 +44,16 @@ function SigninBox() {
           ),
         3000
       );
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       setLoginLoadState(false);
 
-      if (isAxiosError(err)) {
-        const statusCode = err.response.status;
+      if (isAxiosError(e)) {
+        alert(e.response ? e.response.data.message : e.message);
+
+        if (!e.response) return;
+
+        const statusCode = e.response.status;
 
         switch (statusCode) {
           case 404:
@@ -64,11 +68,16 @@ function SigninBox() {
             break;
 
           default:
-            miscNetError(() => setLoginLoadState(null));
+            miscNetError(() => {
+              setLoginLoadState(null);
+            });
             break;
         }
       } else {
-        miscNetError(() => setLoginLoadState(null));
+        miscNetError(() => {
+          setLoginLoadState(null);
+          alert(e.response ? e.response.data.message : e.message);
+        });
       }
     }
   };

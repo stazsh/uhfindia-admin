@@ -38,7 +38,12 @@ function NavigationBarProfile() {
               navigate("/session/signin");
               UTIL_hideDialog(setShowDialog);
             } catch (e) {
-              console.log(e);
+              console.error(e);
+
+              if (e.response.status === 403) {
+                return navigate("/session/signin");
+              }
+
               UTIL_showAlertDialog(
                 setShowDialog,
                 <>

@@ -13,6 +13,7 @@ import UCommunity from "../applets/users/UCommunity";
 import UVolunteers from "../applets/users/UVolunteers";
 import UAdmininstrators from "../applets/users/UAdmininstrators";
 import Feedback from "../applets/feedback/Feedback";
+import UserSettings from "../applets/cog/UserSettings";
 
 export const paneTopElements = [
   {
@@ -114,18 +115,11 @@ export const paneBottomElements = [
     navlink: "/dashboard/settings",
     tabs: [
       {
-        title: "Dashboard Settings",
-        navlink: function () {
-          return "/dashboard/settings/dashboard/*";
-        },
-        element: <div>dash settings</div>,
-      },
-      {
         title: "User Settings",
         navlink: function () {
           return "/dashboard/settings/user/*";
         },
-        element: <div>user settings</div>,
+        element: <UserSettings />,
       },
     ],
   },

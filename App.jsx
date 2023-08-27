@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import NavigationPane from "./components/NavigationPane";
 import { LocalizationProvider } from "@mui/x-date-pickers";
@@ -13,6 +13,7 @@ import { axiosInstance } from "./api/axiosConfig";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [userContextObj, setUserContextObj] = useState({
     email: "",
@@ -38,11 +39,12 @@ function App() {
           });
           setUserContextObj(res.data.user_obj);
           localStorage.setItem("uhf_jwt", res.data.jwt);
-          navigate(
-            res.data.user_obj.role !== "volunteer"
-              ? "/dashboard/volunteer-applications"
-              : "/dashboard/fundraising"
-          );
+          if (location.pathname == "/")
+            navigate(
+              res.data.user_obj.role !== "volunteer"
+                ? "/dashboard/volunteer-applications"
+                : "/dashboard/fundraising"
+            );
         } catch (e) {
           goToSignin();
         }

@@ -15,6 +15,7 @@ import NativeButton from "../../components/NativeButton";
 import { FiTrash } from "react-icons/fi";
 import { UserContext } from "../../context/UserContext";
 import { hierarchy } from "../../constants/hierarchy";
+import { userRoles } from "../../constants/other";
 
 export function UFormUpdate({ updateRole }) {
   const { userContextObj } = useContext(UserContext);
@@ -161,7 +162,7 @@ export function UFormUpdate({ updateRole }) {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="p-8 self-center w-full max-w-[1000px] h-full">
+      <div className="p-8 self-center w-full max-w-[1100px] h-full">
         <div className="flex w-full justify-end">
           {isHAuthorised && (
             <NativeButton
@@ -244,6 +245,11 @@ export function UFormUpdate({ updateRole }) {
             },
             role: {
               "ui:readonly": !isHAuthorised,
+              "ui:enumDisabled": _.filter(
+                userRoles,
+                (value, key, collection) =>
+                  hierarchy[value] >= hierarchy[userContextObj.role]
+              ),
             },
             donations: {
               "ui:readonly": true,

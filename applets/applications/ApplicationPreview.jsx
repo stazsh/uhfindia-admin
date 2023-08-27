@@ -68,8 +68,8 @@ function ApplicationPreview() {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="p-8 self-center w-full max-w-[1000px] h-full">
-        <div className="flex justify-end w-full max-w-[1000px] self-center">
+      <div className="p-8 self-center w-full max-w-[1100px] h-full">
+        <div className="flex justify-end w-full max-w-[1100px] self-center">
           <NativeButton
             IconType={BiTrash}
             text={"Delete application"}
