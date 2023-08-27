@@ -60,11 +60,21 @@ function FeedbackContainerMui() {
         <Table stickyHeader sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell>UUID</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Comment</TableCell>
-              <TableCell>Posted&nbsp;At</TableCell>
+              <TableCell>
+                <b>Username</b>
+              </TableCell>
+              <TableCell>
+                <b>UUID</b>
+              </TableCell>
+              <TableCell>
+                <b>Email</b>
+              </TableCell>
+              <TableCell>
+                <b>Comment</b>
+              </TableCell>
+              <TableCell>
+                <b>Posted&nbsp;At</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
