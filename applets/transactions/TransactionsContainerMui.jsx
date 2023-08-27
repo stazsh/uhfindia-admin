@@ -15,44 +15,13 @@ import {
   UTIL_showLoadingDialog,
 } from "../../utils/muiDialogUtils";
 import { BiErrorCircle } from "react-icons/bi";
+import { transactionsList } from "../../static/TransactionsList";
+import { statusShieldSelector } from "../../components/StatusShields";
 
-function FeedbackContainerMui() {
+function TransactionsContainerMui() {
   const navigate = useNavigate();
   const { setShowDialog } = React.useContext(DialogContext);
   const [feedbackList, setFeedbackList] = React.useState([]);
-
-  React.useEffect(() => {
-    async function getFeedbackList() {
-      try {
-        UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
-        const res = await axiosInstance.get("/feedback", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
-          },
-        });
-
-        UTIL_hideDialog(setShowDialog);
-        setFeedbackList(res.data.payload);
-      } catch (e) {
-        console.error(e);
-        UTIL_showAlertDialog(
-          setShowDialog,
-          <>
-            <div className="flex flex-row flex-start">
-              <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-              An unexpected error occured
-            </div>
-            <div>
-              <div className="m-2" />
-              <code>{e.response.data.message || e.message}</code>
-            </div>
-          </>
-        );
-      }
-    }
-
-    getFeedbackList();
-  }, []);
 
   return (
     <div className="relative flex-grow shrink-0">
@@ -60,32 +29,46 @@ function FeedbackContainerMui() {
         <Table stickyHeader sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell>UUID</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Comment</TableCell>
-              <TableCell>Posted&nbsp;At</TableCell>
+              <TableCell>
+                <b>Tx. ID</b>
+              </TableCell>
+              <TableCell>
+                <b>A/C Holder</b>
+              </TableCell>
+              <TableCell>
+                <b>Email ID</b>
+              </TableCell>
+              <TableCell>
+                <b>Phone (+91)</b>
+              </TableCell>
+              <TableCell>
+                <b>Fundraiser ID</b>
+              </TableCell>
+              <TableCell>
+                <b>Amount (in INR)</b>
+              </TableCell>
+              <TableCell>
+                <b>Tx. Date</b>
+              </TableCell>
+              <TableCell>
+                <b>Status</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {feedbackList.map((row) => (
+            {transactionsList.map((row) => (
               <TableRow
                 className="group cursor-pointer hover:bg-slate-100"
-                key={row.name}
+                key={row._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick={() => navigate(`/dashboard/feedback/${row._id}`)}
+                onClick={() => navigate(`/dashboard/transactions/${row._id}`)}
               >
                 <TableCell component="th" scope="row">
                   <div className="flex whitespace-nowrap flex-row place-items-center">
-                    <img
-                      src={row.user_pfp}
-                      alt="User PFP"
-                      className="h-10 mr-5 aspect-square border-2 transition-all group-hover:border-4 border-blue-300 group-hover:border-blue-600 rounded-full object-cover"
-                    />
-                    {row.user_name}
+                    <code>{row._id}</code>
                   </div>
                 </TableCell>
-                <TableCell>{row.user_id}</TableCell>
+                <TableCell>{row.user_name}</TableCell>
                 <TableCell>
                   <a
                     className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
@@ -94,11 +77,18 @@ function FeedbackContainerMui() {
                     {row.user_email}
                   </a>
                 </TableCell>
-                <TableCell>{row.comment}</TableCell>
+                <TableCell>{row.user_phone}</TableCell>
+                <TableCell>
+                  <code>{row.fundraiser_id}</code>
+                </TableCell>
+                <TableCell>₹ {row.amount}</TableCell>
                 <TableCell className="whitespace-nowrap">
-                  {new Date(row.created_at).toLocaleString("en-in", {
+                  {new Date(row.transaction_date).toLocaleString("en-in", {
                     timeZone: "Asia/Kolkata",
                   })}
+                </TableCell>
+                <TableCell>
+                  {statusShieldSelector[row.status.toLowerCase()]}
                 </TableCell>
               </TableRow>
             ))}
@@ -109,4 +99,4 @@ function FeedbackContainerMui() {
   );
 }
 
-export default FeedbackContainerMui;
+export default TransactionsContainerMui;

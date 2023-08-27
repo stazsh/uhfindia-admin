@@ -15,24 +15,27 @@ import {
   UTIL_showLoadingDialog,
 } from "../../utils/muiDialogUtils";
 import { BiErrorCircle } from "react-icons/bi";
+import { statusShieldSelector } from "../../components/StatusShields";
 
-function FeedbackContainerMui() {
+function VAppListContainerMui() {
   const navigate = useNavigate();
   const { setShowDialog } = React.useContext(DialogContext);
-  const [feedbackList, setFeedbackList] = React.useState([]);
+  const [applicationList, setApplicationList] = React.useState([]);
 
   React.useEffect(() => {
-    async function getFeedbackList() {
+    async function getVApplications() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
-        const res = await axiosInstance.get("/feedback", {
+        const res = await axiosInstance.get("/vapplications", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },
         });
 
+        console.log(res.data.payload);
+
         UTIL_hideDialog(setShowDialog);
-        setFeedbackList(res.data.payload);
+        setApplicationList(res.data.payload);
       } catch (e) {
         console.error(e);
         UTIL_showAlertDialog(
@@ -51,7 +54,7 @@ function FeedbackContainerMui() {
       }
     }
 
-    getFeedbackList();
+    getVApplications();
   }, []);
 
   return (
@@ -60,45 +63,58 @@ function FeedbackContainerMui() {
         <Table stickyHeader sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell>UUID</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Comment</TableCell>
-              <TableCell>Posted&nbsp;At</TableCell>
+              <TableCell>
+                <b>Application ID</b>
+              </TableCell>
+              <TableCell>
+                <b>Name</b>
+              </TableCell>
+              <TableCell>
+                <b>Email</b>
+              </TableCell>
+              <TableCell>
+                <b>Phone</b>
+              </TableCell>
+              <TableCell>
+                <b>Date of Posting (IST)</b>
+              </TableCell>
+              <TableCell>
+                <b>Application Status</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {feedbackList.map((row) => (
+            {applicationList.map((row) => (
               <TableRow
                 className="group cursor-pointer hover:bg-slate-100"
-                key={row.name}
+                key={row._id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick={() => navigate(`/dashboard/feedback/${row._id}`)}
+                onClick={() =>
+                  navigate(`/dashboard/volunteer-applications/${row._id}`)
+                }
               >
                 <TableCell component="th" scope="row">
                   <div className="flex whitespace-nowrap flex-row place-items-center">
-                    <img
-                      src={row.user_pfp}
-                      alt="User PFP"
-                      className="h-10 mr-5 aspect-square border-2 transition-all group-hover:border-4 border-blue-300 group-hover:border-blue-600 rounded-full object-cover"
-                    />
-                    {row.user_name}
+                    <code>{row._id}</code>
                   </div>
                 </TableCell>
-                <TableCell>{row.user_id}</TableCell>
+                <TableCell>{row.name}</TableCell>
                 <TableCell>
                   <a
                     className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
                     href={`mailto:${row.user_email}`}
                   >
-                    {row.user_email}
+                    {row.email}
                   </a>
                 </TableCell>
-                <TableCell>{row.comment}</TableCell>
+                <TableCell>{row.phone}</TableCell>
                 <TableCell className="whitespace-nowrap">
                   {new Date(row.created_at).toLocaleString("en-in", {
                     timeZone: "Asia/Kolkata",
                   })}
+                </TableCell>
+                <TableCell>
+                  {statusShieldSelector[row.application_status.toLowerCase()]}
                 </TableCell>
               </TableRow>
             ))}
@@ -109,4 +125,4 @@ function FeedbackContainerMui() {
   );
 }
 
-export default FeedbackContainerMui;
+export default VAppListContainerMui;

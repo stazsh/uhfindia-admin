@@ -1,16 +1,14 @@
 import React, { useContext } from "react";
 import SectionHeader from "../../components/SectionHeader";
-import UContainer from "./UContainer";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import UForm from "./UForm";
 import { UFormUpdate } from "./UFormUpdate";
 import NativeButton from "../../components/NativeButton";
 import { FiPlus } from "react-icons/fi";
-import { UserContext } from "../../context/UserContext";
+import UContainerMui from "./UContainerMui";
 
 function UCommunity() {
   const navigate = useNavigate();
-  const { userContextObj } = useContext(UserContext);
 
   return (
     <Routes>
@@ -32,7 +30,7 @@ function UCommunity() {
                 />
               </div>
             </div>
-            <UContainer onlyRenderRole={"community"} />
+            <UContainerMui onlyRenderRole={"community"} />
           </div>
         }
       />

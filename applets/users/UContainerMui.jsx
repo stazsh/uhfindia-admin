@@ -15,24 +15,28 @@ import {
   UTIL_showLoadingDialog,
 } from "../../utils/muiDialogUtils";
 import { BiErrorCircle } from "react-icons/bi";
+import { statusShieldSelector } from "../../components/StatusShields";
 
-function FeedbackContainerMui() {
-  const navigate = useNavigate();
+function UContainerMui({ onlyRenderRole }) {
+  const [uList, setUList] = React.useState([]);
   const { setShowDialog } = React.useContext(DialogContext);
-  const [feedbackList, setFeedbackList] = React.useState([]);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    async function getFeedbackList() {
+    async function getUsers() {
       try {
-        UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
-        const res = await axiosInstance.get("/feedback", {
+        const res = await axiosInstance.get("/users", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },
+          params: {
+            filter: {
+              role: onlyRenderRole,
+            },
+          },
         });
-
-        UTIL_hideDialog(setShowDialog);
-        setFeedbackList(res.data.payload);
+        console.log(res.data);
+        setUList(res.data.payload);
       } catch (e) {
         console.error(e);
         UTIL_showAlertDialog(
@@ -51,7 +55,7 @@ function FeedbackContainerMui() {
       }
     }
 
-    getFeedbackList();
+    getUsers();
   }, []);
 
   return (
@@ -60,45 +64,77 @@ function FeedbackContainerMui() {
         <Table stickyHeader sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
-              <TableCell>Username</TableCell>
-              <TableCell>UUID</TableCell>
-              <TableCell>Email</TableCell>
-              <TableCell>Comment</TableCell>
-              <TableCell>Posted&nbsp;At</TableCell>
+              <TableCell>
+                <b>Name</b>
+              </TableCell>
+              <TableCell>
+                <b>UUID</b>
+              </TableCell>
+              <TableCell>
+                <b>Email</b>
+              </TableCell>
+              <TableCell>
+                <b>Phone</b>
+              </TableCell>
+              <TableCell>
+                <b>Donations</b>
+              </TableCell>
+              <TableCell>
+                <b>Created&nbsp;At&nbsp;(IST)</b>
+              </TableCell>
+              <TableCell>
+                <b>Updated&nbsp;At&nbsp;(IST)</b>
+              </TableCell>
+              <TableCell>
+                <b>Service&nbsp;Access</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {feedbackList.map((row) => (
+            {uList.map((row) => (
               <TableRow
                 className="group cursor-pointer hover:bg-slate-100"
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick={() => navigate(`/dashboard/feedback/${row._id}`)}
+                onClick={() =>
+                  navigate(`/dashboard/users/${onlyRenderRole}/${row._id}`)
+                }
               >
                 <TableCell component="th" scope="row">
                   <div className="flex whitespace-nowrap flex-row place-items-center">
                     <img
-                      src={row.user_pfp}
+                      src={row.profurl}
                       alt="User PFP"
                       className="h-10 mr-5 aspect-square border-2 transition-all group-hover:border-4 border-blue-300 group-hover:border-blue-600 rounded-full object-cover"
                     />
-                    {row.user_name}
+                    {row.name}
                   </div>
                 </TableCell>
-                <TableCell>{row.user_id}</TableCell>
+                <TableCell>
+                  <code>{row._id}</code>
+                </TableCell>
                 <TableCell>
                   <a
                     className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
                     href={`mailto:${row.user_email}`}
                   >
-                    {row.user_email}
+                    {row.email}
                   </a>
                 </TableCell>
-                <TableCell>{row.comment}</TableCell>
+                <TableCell>{row.phone}</TableCell>
+                <TableCell>₹ {row.donations}</TableCell>
                 <TableCell className="whitespace-nowrap">
                   {new Date(row.created_at).toLocaleString("en-in", {
                     timeZone: "Asia/Kolkata",
                   })}
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
+                  {new Date(row.updated_at).toLocaleString("en-in", {
+                    timeZone: "Asia/Kolkata",
+                  })}
+                </TableCell>
+                <TableCell>
+                  {statusShieldSelector[`_${row.allow_access}`]}
                 </TableCell>
               </TableRow>
             ))}
@@ -109,4 +145,4 @@ function FeedbackContainerMui() {
   );
 }
 
-export default FeedbackContainerMui;
+export default UContainerMui;

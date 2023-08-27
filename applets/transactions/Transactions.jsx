@@ -1,6 +1,6 @@
 import React from "react";
-import TransactionsContainer from "./TransactionsContainer";
 import SectionHeader from "../../components/SectionHeader";
+import TransactionsContainerMui from "./TransactionsContainerMui";
 
 function Transactions() {
   return (
@@ -10,7 +10,7 @@ function Transactions() {
         subtitle="View and manage your user donations."
       />
 
-      <TransactionsContainer />
+      <TransactionsContainerMui />
     </div>
   );
 }

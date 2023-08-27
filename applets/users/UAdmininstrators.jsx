@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import SectionHeader from "../../components/SectionHeader";
-import UContainer from "./UContainer";
 import NativeButton from "../../components/NativeButton";
 import { FiPlus } from "react-icons/fi";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import UForm from "./UForm";
 import { UFormUpdate } from "./UFormUpdate";
 import { UserContext } from "../../context/UserContext";
+import UContainerMui from "./UContainerMui";
 
 function UAdmininstrators() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function UAdmininstrators() {
               )}
             </div>
 
-            <UContainer onlyRenderRole={"admin"} />
+            <UContainerMui onlyRenderRole={"admin"} />
           </div>
         }
       />

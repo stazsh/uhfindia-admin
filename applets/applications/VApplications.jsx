@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import SectionHeader from "../../components/SectionHeader";
-import VAppListContainer from "./VAppListContainer";
 import ApplicationPreview from "./ApplicationPreview";
+import VAppListContainerMui from "./VAppListContainerMui";
 
 function VApplications() {
   return (
@@ -15,7 +15,7 @@ function VApplications() {
               subtitle="Manage your volunteer application pool."
             />
 
-            <VAppListContainer />
+            <VAppListContainerMui />
           </div>
         }
       />

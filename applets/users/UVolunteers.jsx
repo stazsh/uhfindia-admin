@@ -1,11 +1,11 @@
 import React from "react";
 import SectionHeader from "../../components/SectionHeader";
-import UContainer from "./UContainer";
 import NativeButton from "../../components/NativeButton";
 import { FiPlus } from "react-icons/fi";
 import UForm from "./UForm";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { UFormUpdate } from "./UFormUpdate";
+import UContainerMui from "./UContainerMui";
 
 export default function UVolunteers() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function UVolunteers() {
                 />
               </div>
             </div>
-            <UContainer onlyRenderRole={"volunteer"} />
+            <UContainerMui onlyRenderRole={"volunteer"} />
           </div>
         }
       />
