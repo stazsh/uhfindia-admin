@@ -36,8 +36,14 @@ function UContainer({ className, onlyRenderRole }) {
         UTIL_showAlertDialog(
           setShowDialog,
           <>
-            <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-            <span>An unexpected error occured</span>
+            <div className="flex flex-row flex-start">
+              <BiErrorCircle fontSize={30} className="inline-block mr-4" />
+              An unexpected error occured
+            </div>
+            <div>
+              <div className="m-2" />
+              <code>{e.response.data.message || e.message}</code>
+            </div>
           </>
         );
       }

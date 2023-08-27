@@ -24,11 +24,11 @@ export default {
         "focus-ring-nav": "#4d4d4d",
         "primary-shade-nav": "#2a2a2a",
         "secondary-shade-nav": "#3f3f3f",
-        "boundary": "#eaeaea",
+        boundary: "#eaeaea",
         /* Content theme: */
-        "primary": "#3a3a3a",
-        "secondary": "#696969",
-        "tertiary": "#797979",
+        primary: "#3a3a3a",
+        secondary: "#696969",
+        tertiary: "#797979",
       },
     },
 
@@ -39,10 +39,10 @@ export default {
       md: "768px",
       // => @media (min-width: 768px) { ... }
 
-      mob: { max: "1023px" },
+      mob: { max: "1300px" },
       // => @media (max-width: 1024px) { ... }
 
-      wide: "1024px",
+      wide: "1301px",
       // => @media (min-width: 1025px) { ... }
 
       xl: "1280px",

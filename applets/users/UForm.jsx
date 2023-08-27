@@ -119,7 +119,11 @@ function UForm({ createRole }) {
                 setShowDialog,
                 <>
                   <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-                  <span>An unexpected error occured</span>
+                  <span>
+                    <div>An unexpected error occured</div>
+                    <br />
+                    <code>{e.response.data.message || e.message}</code>
+                  </span>
                 </>
               );
             }

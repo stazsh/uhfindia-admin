@@ -14,11 +14,13 @@ import { BiCheckCircle, BiErrorCircle } from "react-icons/bi";
 import NativeButton from "../../components/NativeButton";
 import { FiTrash } from "react-icons/fi";
 import { UserContext } from "../../context/UserContext";
+import { hierarchy } from "../../constants/hierarchy";
 
 export function UFormUpdate({ updateRole }) {
   const { userContextObj } = useContext(UserContext);
   const { setShowDialog } = useContext(DialogContext);
   const [formData, setFormData] = useState([]);
+  const [isHAuthorised, setIsHAuthorised] = useState([]);
   const formRef = useRef();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -52,13 +54,25 @@ export function UFormUpdate({ updateRole }) {
           donations: res.data.payload[0].donations,
           allow_access: res.data.payload[0].allow_access,
         });
+
+        setIsHAuthorised(
+          hierarchy[userContextObj.role] > hierarchy[res.data.payload[0].role]
+            ? true
+            : false
+        );
       } catch (e) {
         console.error(e);
         UTIL_showAlertDialog(
           setShowDialog,
           <>
-            <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-            <span>An unexpected error occured</span>
+            <div className="flex flex-row flex-start">
+              <BiErrorCircle fontSize={30} className="inline-block mr-4" />
+              An unexpected error occured
+            </div>
+            <div>
+              <div className="m-2" />
+              <code>{e.response.data.message || e.message}</code>
+            </div>
           </>
         );
       }
@@ -96,7 +110,11 @@ export function UFormUpdate({ updateRole }) {
         setShowDialog,
         <>
           <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-          <span>An unexpected error occured</span>
+          <span>
+            <div>An unexpected error occured</div>
+            <br />
+            <code>{e.response.data.message || e.message}</code>
+          </span>
         </>
       );
     }
@@ -131,7 +149,11 @@ export function UFormUpdate({ updateRole }) {
         setShowDialog,
         <>
           <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-          <span>An unexpected error occured</span>
+          <span>
+            <div>An unexpected error occured</div>
+            <br />
+            <code>{e.response.data.message || e.message}</code>
+          </span>
         </>
       );
     }
@@ -141,12 +163,14 @@ export function UFormUpdate({ updateRole }) {
     <div className="flex flex-row justify-center">
       <div className="p-8 self-center w-full max-w-[1000px] h-full">
         <div className="flex w-full justify-end">
-          <NativeButton
-            IconType={FiTrash}
-            text={"Delete " + updateRole}
-            type={"red"}
-            onClick={deleteUser}
-          />
+          {isHAuthorised && (
+            <NativeButton
+              IconType={FiTrash}
+              text={"Delete " + updateRole}
+              type={"red"}
+              onClick={deleteUser}
+            />
+          )}
         </div>
         <Form
           formData={formData}
@@ -192,34 +216,41 @@ export function UFormUpdate({ updateRole }) {
             },
           }}
           uiSchema={{
-            role: {
-              "ui:readonly": true,
+            "ui:submitButtonOptions": {
+              norender: !isHAuthorised,
+            },
+            name: {
+              "ui:readonly": !isHAuthorised,
+            },
+            profurl: {
+              "ui:readonly": !isHAuthorised,
             },
             password: {
               "ui:widget": "password",
               "ui:options": {
                 inputType: "password",
               },
+              "ui:readonly": !isHAuthorised,
             },
             email: {
               "ui:widget": "email",
+              "ui:readonly": !isHAuthorised,
             },
             phone: {
               "ui:options": {
                 inputType: "tel",
               },
+              "ui:readonly": !isHAuthorised,
             },
             role: {
-              "ui:readonly":
-                userContextObj.role !== "superadmin" ? true : false,
+              "ui:readonly": !isHAuthorised,
             },
             donations: {
               "ui:readonly": true,
             },
             allow_access: {
               "ui:widget": "radio",
-              "ui:readonly":
-                userContextObj.role !== "superadmin" ? true : false,
+              "ui:readonly": !isHAuthorised,
             },
           }}
           validator={validator}

@@ -18,15 +18,15 @@ function UCommunity() {
         path="/"
         element={
           <div className="w-full h-full flex flex-col space-y-8 p-8">
-            <div className="flex flex-row">
+            <div className="flex flex-row mob:flex-col">
               <SectionHeader
                 title={"Users.Community"}
                 subtitle="View and manage your community users."
               />
-              <div>
+              <div className="flex flex-row justify-end mob:mt-4">
                 <NativeButton
                   IconType={FiPlus}
-                  text={"Add new community user"}
+                  text={"Add new"}
                   type={"green"}
                   onClick={() => navigate("/dashboard/users/community/create")}
                 />

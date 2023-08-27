@@ -80,12 +80,12 @@ function NavigationPane() {
   // NOTE: `paneTopAddons` must be API generated and tailored for owners
 
   return (
-    <div className="flex flex-row h-full w-full">
+    <div className="flex flex-row mob:flex-col-reverse mob:justify-end h-full w-full">
       <div
         id="nav-pane"
-        className="relative flex-shrink-0 pt-1.5 flex group flex-col border-r border-boundary justify-between resize-x h-full box-border w-[250px] px-3 transition"
+        className="relative mob:h-[70px] mob:space-x-3 mob:items-center flex-shrink-0 pt-1.5 mob:pt-0 flex group flex-col mob:flex-row border-r border-boundary justify-between mob:justify-center h-full box-border w-fit mob:w-full px-3 mob:px-0 transition"
       >
-        <div className="space-y-3 pt-2">
+        <div className="space-y-3 mob:space-y-0 mob:space-x-3 pt-2 mob:pt-0 flex flex-col mob:flex-row mob:h-fit">
           {paneTopElements.map((i) =>
             userContextObj.role === "volunteer" &&
             (i.id === "pane-users" || i.id === "pane-applications") ? (
@@ -104,7 +104,7 @@ function NavigationPane() {
                 className="text-white flex flex-row place-items-center box-border outline-none hover:bg-[#ffffff44] active:bg-slate-200 active:text-black transition-colors cursor-pointer p-3 rounded-xl"
               >
                 {i.icon}
-                <div className="pl-3 capitalize pr-2 pane-item-label text-sm text-inherit font-semibold">
+                <div className="pl-3 w-[200px] mob:hidden capitalize pr-2 pane-item-label text-sm text-inherit font-semibold">
                   {i.label}
                 </div>
               </div>
@@ -112,7 +112,7 @@ function NavigationPane() {
           )}
         </div>
 
-        <div className="space-y-3 pb-2">
+        <div className="space-y-3 mob:space-y-0 mob:space-x-3 pb-2 mob:pb-0">
           {paneBottomElements.map((i) => (
             <div
               key={i.id}
@@ -127,7 +127,7 @@ function NavigationPane() {
               className="text-white flex flex-row place-items-center box-border outline-none  hover:bg-[#ffffff44] active:bg-slate-200 active:text-black transition-colors cursor-pointer p-3 rounded-xl"
             >
               {i.icon}
-              <div className="pl-3 capitalize pr-2 pane-item-label text-sm text-inherit font-semibold overflow-hidden">
+              <div className="pl-3 w-[200px] mob:hidden capitalize pr-2 pane-item-label text-sm text-inherit font-semibold overflow-hidden">
                 {i.label}
               </div>
             </div>
@@ -144,7 +144,7 @@ function NavigationPane() {
               .getElementById("pane-retractor")
               .classList.toggle("rotatecw-180");
           }}
-          className="absolute right-0 translate-x-1/2 cursor-pointer shadow-md shadow-[#00000030] shado ring-blue-500 hover:ring-4 transition duration-300 p-2 bg-white text-blue-600 top-1/2 -translate-y-1/2 rounded-full"
+          className="absolute mob:hidden right-0 translate-x-1/2 cursor-pointer shadow-md shadow-[#00000030] shado ring-blue-500 hover:ring-4 transition duration-300 p-2 bg-white text-blue-600 top-1/2 -translate-y-1/2 rounded-full"
         >
           <FaChevronRight
             id="pane-retractor"
@@ -154,10 +154,7 @@ function NavigationPane() {
         </div>
       </div>
 
-      <div
-        className="flex-grow flex flex-col overflow-auto"
-        style={{ height: "calc(100vh - 5rem)" }}
-      >
+      <div className="wide:flex-grow flex flex-col overflow-auto h-[calc(100vh-5rem-70px)]">
         <Routes>
           {gRouteArray.map((i) => (
             <Route
@@ -171,8 +168,7 @@ function NavigationPane() {
         </Routes>
         <div
           id="dynamic-container"
-          className="overflow-auto"
-          style={{ height: "calc(100% - 4rem)" }}
+          className="overflow-auto h-[calc(100%-4rem)] mob:h-[calc(100%-4rem)]"
         >
           <Routes>
             {gRouteArray.map((i) => (
@@ -189,13 +185,13 @@ function NavigationPane() {
             {Boolean(showDialog) ? (
               <DialogContent>
                 {showDialog.message}
-                {showDialog.buttons.map((button) => (
-                  <DialogActions key={uid(10)}>
+                <DialogActions key={uid(10)}>
+                  {showDialog.buttons.map((button) => (
                     <Button autoFocus onClick={button.onClick}>
                       {button.label}
                     </Button>
-                  </DialogActions>
-                ))}
+                  ))}
+                </DialogActions>
               </DialogContent>
             ) : null}
           </Dialog>

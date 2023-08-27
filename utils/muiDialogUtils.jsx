@@ -54,14 +54,14 @@ export function UTIL_showConfirmDialog(
         label: "Abort",
         onClick: async () => {
           setShowDialog(null);
-          onAbort ? onAbort() : null;
+          onAbort ? await onAbort() : null;
         },
       },
       {
         label: "Confirm",
         onClick: async () => {
           setShowDialog(null);
-          onConfirm ? onConfirm() : null;
+          onConfirm ? await onConfirm() : null;
         },
       },
     ],

@@ -1,14 +1,5 @@
 import "../styles/navigation-bar.css";
-import {
-  FaBell,
-  FaCalendarAlt,
-  FaChessBishop,
-  FaChevronDown,
-  FaEnvelope,
-  FaFlask,
-  FaQuestionCircle,
-  FaSearch,
-} from "react-icons/fa";
+import { FaChevronDown, FaQuestionCircle } from "react-icons/fa";
 import NavigationBarProfile from "./NavigationBarProfile";
 import LOGO from "../assets/logo-min.png";
 import { BiGlobe } from "react-icons/bi";
@@ -20,32 +11,22 @@ function NavigationBar({ children }) {
     <div className="h-full w-full flex flex-col">
       <div
         id="top-navbar"
-        className="h-[5rem] w-full bg-black flex flex-row justify-between"
+        className="h-[5rem] w-full bg-black flex flex-row justify-between mob:justify-center"
       >
-        <div className="flex place-items-center pl-2 w-[35%]">
+        <div className="flex place-items-center pl-2 w-fit">
           <div className="flex place-items-center">
-            <img src={LOGO} className="inline-block mr-3 w-10" />
-            <span className="text-white text-2xl">
+            <img
+              src={LOGO}
+              className="inline-block mr-3 w-10 rounded-full border-white border"
+            />
+            <span className="text-white text-2xl mob:hidden">
               United
-              <span className="font-black"> H.O.P.E.</span>
+              <span className="font-black"> H.O.P.E. </span>
               Foundation
             </span>
           </div>
-          {/* separator */}
-          <div className="h-1/2 w-[2px] bg-secondary-shade-nav mx-5" />
-          <div className="space-x-2 flex flex-row">
-            <span className="text-tertiary-nav text-sm flex place-items-center hover:text-secondary-nav select-none transition-colors cursor-pointer hover:bg-secondary-shade-nav p-1 px-2 rounded-md">
-              <FaQuestionCircle fontSize={16} className="inline-block" />
-              <span>&nbsp;Help</span>&nbsp;
-              <FaChevronDown fontSize={10} />
-            </span>
-            <span className="text-tertiary-nav text-sm hover:text-secondary-nav select-none transition-colors cursor-pointer hover:bg-secondary-shade-nav p-1 px-2 rounded-md flex place-items-center">
-              <BiGlobe fontSize={16} className="inline-block" />
-              <span>&nbsp;Visit Homepage</span>
-            </span>
-          </div>
         </div>
-        <div className="space-x-4 flex items-center justify-end">
+        <div className="space-x-4 mob:space-x-0 flex items-center justify-end">
           {[
             { label: "Home", hyperlink: "/lol" },
             { label: "Activities", hyperlink: "/lmao" },
@@ -57,7 +38,7 @@ function NavigationBar({ children }) {
             <a
               key={uid(10)}
               href={item.hyperlink}
-              className="text-secondary-nav hover:border-b border-white group hover:text-primary-nav transition-colors duration-300"
+              className="text-secondary-nav mob:hidden hover:border-b border-white group hover:text-primary-nav transition-colors duration-300"
             >
               {item.label}
               <span className="opacity-0 group-hover:opacity-100 duration-300">
