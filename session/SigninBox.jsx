@@ -35,7 +35,15 @@ function SigninBox() {
       localStorage.setItem("uhf_jwt_ref", res.data.jwt_refresh);
 
       // TODO: timeout added for demonstrative purposes only, remove in production
-      setTimeout(() => navigate("/dashboard/home"), 3000);
+      setTimeout(
+        () =>
+          navigate(
+            res.data.user_obj.role !== "volunteer"
+              ? "/dashboard/volunteer-applications"
+              : "/dashboard/fundraising"
+          ),
+        3000
+      );
     } catch (err) {
       console.error(err);
       setLoginLoadState(false);
@@ -66,7 +74,7 @@ function SigninBox() {
   };
 
   return (
-    <div className="w-[50%]">
+    <div className="w-[50%] mob:w-full mob:p-10">
       <div className="w-full text-3xl mb-9 text-primary">Sign-in</div>
 
       <label

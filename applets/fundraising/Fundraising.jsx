@@ -14,8 +14,8 @@ function Fundraising() {
       <Route
         path="/"
         element={
-          <div className="w-full h-full flex flex-col space-y-8 p-8">
-            <div className="flex flex-row">
+          <div className="w-full h-full flex flex-col space-y-8 p-8 mob:p-5">
+            <div className="flex flex-row mob:flex-col mob:space-y-3">
               <SectionHeader
                 title={"Fundraising"}
                 subtitle={

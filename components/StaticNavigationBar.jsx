@@ -11,29 +11,20 @@ function StaticNavigationBar({ children }) {
         id="top-navbar"
         className="h-[5rem] w-full bg-black flex flex-row justify-between"
       >
-        <div className="flex place-items-center pl-2 w-[35%]">
+        <div className="flex place-items-center pl-2">
           <div className="flex place-items-center overflow-visible">
             <img src={LOGO} className="inline-block mr-3 w-16" />
-            <span className="text-white text-2xl">
+            <span className="text-white text-2xl mob:text-lg">
               United
               <span className="font-black"> H.O.P.E. </span>
-              Foundation
-            </span>
-          </div>
-          {/* separator */}
-          <div className="h-1/2 w-[2px] bg-secondary-shade-nav mx-5" />
-          <div className="space-x-2 flex flex-row">
-            <span className="text-tertiary-nav text-sm flex items-center justify-center hover:text-secondary-nav select-none transition-colors cursor-pointer hover:bg-secondary-shade-nav p-1 px-2 rounded-md">
-              <FaQuestionCircle fontSize={16} className="inline-block" />
-              <span>&nbsp;Support</span>&nbsp;
-              <FaChevronDown fontSize={10} />
+              <span className="mob:block">Foundation</span>
             </span>
           </div>
         </div>
 
         <div
           id="hyperlwinks"
-          className="mx-[3rem] space-x-8 transition flex flex-row place-items-center"
+          className="mx-[3rem] mob:hidden space-x-8 transition flex flex-row place-items-center"
         >
           {[
             { label: "Home", hyperlink: "/lol" },

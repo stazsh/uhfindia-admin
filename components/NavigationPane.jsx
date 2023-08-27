@@ -154,7 +154,7 @@ function NavigationPane() {
         </div>
       </div>
 
-      <div className="wide:flex-grow flex flex-col overflow-auto h-[calc(100vh-5rem-70px)]">
+      <div className="wide:flex-grow flex flex-col overflow-auto mob:h-[calc(100vh-5rem-70px)] h-[calc(100vh-5rem)]">
         <Routes>
           {gRouteArray.map((i) => (
             <Route
@@ -168,7 +168,7 @@ function NavigationPane() {
         </Routes>
         <div
           id="dynamic-container"
-          className="overflow-auto h-[calc(100%-4rem)] mob:h-[calc(100%-4rem)]"
+          className="overflow-auto h-[calc(100%-4rem)]"
         >
           <Routes>
             {gRouteArray.map((i) => (

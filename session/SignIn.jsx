@@ -26,7 +26,10 @@ function SignIn() {
 
   return (
     <div id="main-parent3" className="w-full h-full flex flex-row">
-      <div id="parent3" className="w-1/2 h-full relative overflow-hidden">
+      <div
+        id="parent3"
+        className="w-1/2 h-full relative overflow-hidden mob:hidden"
+      >
         <div
           className="flex flex-col flex-grow justify-between w-full p-9 text-white h-full z-10"
           id="signin-image-box"
@@ -68,7 +71,7 @@ function SignIn() {
           </div>
         </div>
       </div>
-      <div className="w-1/2 h-full flex flex-col items-center justify-center">
+      <div className="w-1/2 mob:w-full h-full flex flex-col items-center justify-center">
         <SigninBox />
       </div>
     </div>

@@ -17,7 +17,7 @@ function NavigationBar({ children }) {
           <div className="flex place-items-center">
             <img
               src={LOGO}
-              className="inline-block mr-3 w-10 rounded-full border-white border"
+              className="inline-block mr-3 w-10 mob:w-[3.25rem] rounded-full border-white border"
             />
             <span className="text-white text-2xl mob:hidden">
               United

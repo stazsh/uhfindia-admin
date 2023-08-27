@@ -59,15 +59,15 @@ function CampaignItem({
       </div>
 
       <div
-        className={"p-5 h-fit"}
+        className={"p-5 mob:p-3 h-fit"}
         style={{ backgroundColor: themeColour[1].split("-")[0] }}
       >
-        <div className="grid gap-5 grid-cols-2">
+        <div className="grid gap-5 mob:gap-3 grid-cols-2">
           <div className="rounded-xl h-20 bg-[#00000022] text-white p-2 flex flex-row justify-evenly items-center hover:shadow-lg transition-all duration-300">
             <FaDonate fontSize={30} className="mr-2 inline-block" />
             <div className="flex flex-col justify-center">
               <div className="text-xs font-semibold">Target</div>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl mob:text-sm font-bold">
                 ₹ {commaNumber(target_amount)}
               </div>
             </div>
@@ -76,7 +76,7 @@ function CampaignItem({
             <RiFundsFill fontSize={34} className="mr-2 inline-block" />
             <div className="flex flex-col justify-center">
               <div className="text-xs font-semibold">Raised so far</div>
-              <div className="text-2xl font-bold">
+              <div className="text-2xl mob:text-sm font-bold">
                 ₹ {commaNumber(current_amount)}
               </div>
             </div>

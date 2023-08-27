@@ -63,11 +63,11 @@ function FundraiserCampaignsContainer({ className }) {
         <SubsectionHeader
           icon={<IoPeopleOutline fontSize={20} />}
           label={"Fundraising Campaigns"}
-          className="p-5 border-b-boundary border-b shadow-lg"
+          className="p-5 mob:p-2 border-b-boundary border-b shadow-lg"
         />
 
         <div className="relative flex-grow shrink-0">
-          <div className="absolute top-0 left-0 p-10 w-full h-full overflow-y-auto gap-10 grid grid-cols-3 auto-rows-min">
+          <div className="absolute top-0 left-0 p-10 mob:p-3 w-full h-full overflow-y-auto gap-10 grid grid-cols-3 mob:grid-cols-1 auto-rows-min">
             {fundraiserList.map((item) => {
               return (
                 <CampaignItem
