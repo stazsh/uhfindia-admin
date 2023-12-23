@@ -103,6 +103,7 @@ function App() {
                   </NavigationBar>
                 }
               />
+              <Route path="/" element={<></>} />
             </Routes>
           </DialogContext.Provider>
         </UserContext.Provider>
