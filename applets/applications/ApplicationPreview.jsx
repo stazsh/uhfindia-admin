@@ -11,8 +11,14 @@ import {
 } from "../../utils/muiDialogUtils";
 import { IoCloudDoneSharp } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
-import { BiCheckCircle, BiErrorCircle, BiTrash } from "react-icons/bi";
+import {
+  BiCheckCircle,
+  BiErrorCircle,
+  BiMailSend,
+  BiTrash,
+} from "react-icons/bi";
 import NativeButton from "../../components/NativeButton";
+import { jsonToUrlEncodedString } from "../../utils/others";
 
 function ApplicationPreview() {
   const formRef = useRef();
@@ -69,7 +75,53 @@ function ApplicationPreview() {
   return (
     <div className="flex flex-row justify-center">
       <div className="p-8 self-center w-full max-w-[1100px] h-full">
-        <div className="flex justify-end w-full max-w-[1100px] self-center">
+        <div className="flex justify-end w-full space-x-5 max-w-[1100px] self-center pb-10">
+          <NativeButton
+            IconType={BiMailSend}
+            text={"Send Rejection Mail"}
+            type={"blue"}
+            onClick={function (e) {
+              const encodedEmail = jsonToUrlEncodedString({
+                subject: "UHF India Volunteer Application Status: Rejected",
+                body: `Dear ${formData.name},\n\nWe regret to inform you that your volunteering application for the United HOPE Foundation India NGO has been reviewed, and unfortunately, it has not been approved at this time. We appreciate your interest in contributing to our cause. While your application was not successful on this occasion, we encourage you to continue supporting us in other ways or explore further opportunities with our organization in the future. Thank you for your understanding and continued support.\n\nThank you,\nUHF India Team`,
+              });
+              const mailtoLink = `mailto:${formData.email}?${encodedEmail}`;
+              const a = document.createElement("a");
+              a.setAttribute("href", mailtoLink);
+              a.setAttribute("target", "_blank");
+              a.style.display = "none"; // Hide the anchor element
+
+              document.body.appendChild(a);
+
+              a.click(); // Programmatically click on the anchor element
+
+              document.body.removeChild(a); // Remove the anchor element from the document
+            }}
+          />
+
+          <NativeButton
+            IconType={BiMailSend}
+            text={"Send Approval Mail"}
+            type={"blue"}
+            onClick={function (e) {
+              const encodedEmail = jsonToUrlEncodedString({
+                subject: "UHF India Volunteer Application Approval",
+                body: `Dear ${formData.name},\n\nWe are pleased to inform you that your volunteering application for the United HOPE Foundation India NGO has been approved! Your dedication and commitment to making a difference are truly appreciated. We look forward to your valuable contributions to our cause. Thank you for choosing to be a part of our efforts to bring positive change to our community.\n\nThank you,\nUHF India Team`,
+              });
+              const mailtoLink = `mailto:${formData.email}?${encodedEmail}`;
+              const a = document.createElement("a");
+              a.setAttribute("href", mailtoLink);
+              a.setAttribute("target", "_blank");
+              a.style.display = "none"; // Hide the anchor element
+
+              document.body.appendChild(a);
+
+              a.click(); // Programmatically click on the anchor element
+
+              document.body.removeChild(a); // Remove the anchor element from the document
+            }}
+          />
+
           <NativeButton
             IconType={BiTrash}
             text={"Delete application"}
