@@ -35,7 +35,7 @@ function FundraisingForm({ createMode }) {
 
         setTimeout(() => {
           UTIL_hideDialog(setShowDialog);
-        }, 343);
+        });
 
         setFormData({
           title: res.data.payload.title,
@@ -93,7 +93,7 @@ function FundraisingForm({ createMode }) {
             <span>Item updated succesfully</span>
           </>
         );
-      }, 343);
+      });
     } catch (e) {
       console.error(e);
       UTIL_showAlertDialog(
@@ -127,7 +127,7 @@ function FundraisingForm({ createMode }) {
           </>,
           () => navigate(-1)
         );
-      }, 343);
+      });
     } catch (e) {
       console.error(e);
       UTIL_showAlertDialog(
@@ -166,7 +166,7 @@ function FundraisingForm({ createMode }) {
           </>,
           () => navigate(-1)
         );
-      }, 343);
+      });
     } catch (e) {
       console.error(e);
       UTIL_showAlertDialog(

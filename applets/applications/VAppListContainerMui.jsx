@@ -15,6 +15,8 @@ import {
 } from "../../utils/muiDialogUtils";
 import { statusShieldSelector } from "../../components/StatusShields";
 import { useQuery } from "@tanstack/react-query";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { BiXCircle } from "react-icons/bi";
 
 function VAppListContainerMui() {
   const navigate = useNavigate();
@@ -58,6 +60,9 @@ function VAppListContainerMui() {
               <TableCell>
                 <b>Application Status</b>
               </TableCell>
+              <TableCell>
+                <b>Mail Dispatched?</b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -93,6 +98,13 @@ function VAppListContainerMui() {
                   </TableCell>
                   <TableCell>
                     {statusShieldSelector[row.application_status.toLowerCase()]}
+                  </TableCell>
+                  <TableCell>
+                    {row.is_email_sent ? (
+                      <FaRegCheckCircle fontSize={20} color="00ff00" />
+                    ) : (
+                      <BiXCircle fontSize={20} color="red" />
+                    )}
                   </TableCell>
                 </TableRow>
               ))}

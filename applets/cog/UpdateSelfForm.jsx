@@ -36,7 +36,7 @@ function UpdateSelfForm() {
 
         setTimeout(() => {
           UTIL_hideDialog(setShowDialog);
-        }, 343);
+        });
 
         setFormData({
           name: res.data.payload.name,
@@ -188,7 +188,7 @@ function UpdateSelfForm() {
                     <span>Account details updated succesfully</span>
                   </>
                 );
-              }, 343);
+              });
             } catch (e) {
               console.error(e);
               UTIL_showAlertDialog(

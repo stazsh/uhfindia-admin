@@ -36,7 +36,7 @@ function ApplicationPreview() {
 
         setTimeout(() => {
           UTIL_hideDialog(setShowDialog);
-        }, 343);
+        });
 
         setFormData({
           name: res.data.payload.name,
@@ -98,7 +98,7 @@ function ApplicationPreview() {
                   </>,
                   () => navigate(-1)
                 );
-              }, 343);
+              });
             }}
           />
         </div>
@@ -131,6 +131,12 @@ function ApplicationPreview() {
                 type: "string",
                 title: "Application status",
                 enum: ["Approved", "Rejected", "Pending"],
+              },
+              is_email_sent: {
+                type: "boolean",
+                title: "Confirmation email sent",
+                description:
+                  "Accountability checkbox: if confirmation email has been sent, mark as checked",
               },
             },
             required: ["application_status"],
@@ -170,9 +176,6 @@ function ApplicationPreview() {
                 "/vapplications",
                 formRef.current.state.formData,
                 {
-                  headers: {
-                    Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
-                  },
                   params: {
                     filter: { _id: id },
                   },
@@ -190,7 +193,7 @@ function ApplicationPreview() {
                     <span>Application updated successfully</span>
                   </>
                 );
-              }, 343);
+              });
             } catch (e) {
               console.error(e);
               UTIL_showAlertDialog(

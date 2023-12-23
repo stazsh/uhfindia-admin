@@ -41,7 +41,7 @@ export function UFormUpdate({ updateRole }) {
 
         setTimeout(() => {
           UTIL_hideDialog(setShowDialog);
-        }, 343);
+        });
 
         console.log(res.data);
 
@@ -104,7 +104,7 @@ export function UFormUpdate({ updateRole }) {
             <span>User updated succesfully</span>
           </>
         );
-      }, 343);
+      });
     } catch (e) {
       console.error(e);
       UTIL_showAlertDialog(
@@ -143,7 +143,7 @@ export function UFormUpdate({ updateRole }) {
           </>,
           () => navigate(-1)
         );
-      }, 343);
+      });
     } catch (e) {
       console.error(e);
       UTIL_showAlertDialog(

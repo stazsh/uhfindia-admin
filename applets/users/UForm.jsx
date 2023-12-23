@@ -112,7 +112,7 @@ function UForm({ createRole }) {
                   </>,
                   () => navigate(-1)
                 );
-              }, 343);
+              });
             } catch (e) {
               console.error(e);
               UTIL_showAlertDialog(

@@ -29,19 +29,14 @@ function FeedbackForm() {
               _id: id,
             },
           },
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
-          },
         });
 
         setTimeout(() => {
           UTIL_hideDialog(setShowDialog);
-        }, 343);
+        });
 
         setFormData({
-          user_id: res.data.payload.user_id,
           user_name: res.data.payload.user_name,
-          user_pfp: res.data.payload.user_pfp,
           user_email: res.data.payload.user_email,
           comment: res.data.payload.comment,
         });
@@ -98,7 +93,7 @@ function FeedbackForm() {
                   </>,
                   () => navigate(-1)
                 );
-              }, 343);
+              });
             }}
           />
         </div>
@@ -109,17 +104,9 @@ function FeedbackForm() {
             title: `Feedback ${id}`,
             type: "object",
             properties: {
-              user_id: {
-                type: "string",
-                title: "Object ID",
-              },
               user_name: {
                 type: "string",
-                title: "Username",
-              },
-              user_pfp: {
-                type: "string",
-                title: "Profile picture link",
+                title: "Name",
               },
               user_email: {
                 type: "string",
@@ -135,15 +122,7 @@ function FeedbackForm() {
             "ui:submitButtonOptions": {
               norender: true,
             },
-            user_id: {
-              "ui:classNames": "dark-text",
-              "ui:readonly": true,
-            },
             user_name: {
-              "ui:classNames": "dark-text",
-              "ui:readonly": true,
-            },
-            user_pfp: {
               "ui:classNames": "dark-text",
               "ui:readonly": true,
             },

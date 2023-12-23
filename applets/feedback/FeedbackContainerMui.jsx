@@ -61,10 +61,7 @@ function FeedbackContainerMui() {
           <TableHead>
             <TableRow>
               <TableCell>
-                <b>Username</b>
-              </TableCell>
-              <TableCell>
-                <b>UUID</b>
+                <b>Name</b>
               </TableCell>
               <TableCell>
                 <b>Email</b>
@@ -86,16 +83,10 @@ function FeedbackContainerMui() {
                 onClick={() => navigate(`/dashboard/feedback/${row._id}`)}
               >
                 <TableCell component="th" scope="row">
-                  <div className="flex whitespace-nowrap flex-row place-items-center">
-                    <img
-                      src={row.user_pfp}
-                      alt="User PFP"
-                      className="h-10 mr-5 aspect-square border-2 transition-all group-hover:border-4 border-blue-300 group-hover:border-blue-600 rounded-full object-cover"
-                    />
+                  <div className="whitespace-nowrap flex-row place-items-center">
                     {row.user_name}
                   </div>
                 </TableCell>
-                <TableCell>{row.user_id}</TableCell>
                 <TableCell>
                   <a
                     className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"

@@ -33,7 +33,7 @@ function FundraiserCampaignsContainer({ className }) {
 
         setTimeout(() => {
           UTIL_hideDialog(setShowDialog);
-        }, 343);
+        });
 
         setFundraiserList(res.data.payload);
       } catch (e) {
