@@ -10,6 +10,16 @@ import StaticNavigationBar from "./components/StaticNavigationBar";
 import { UserContext } from "./context/UserContext";
 import { DialogContext } from "./context/DialogContext";
 import { axiosInstance } from "./api/axiosConfig";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchInterval: 30000,
+      notifyOnChangeProps: ["data", "error"],
+    },
+  },
+});
 
 function App() {
   const navigate = useNavigate();
@@ -57,46 +67,48 @@ function App() {
   }, []);
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <UserContext.Provider value={{ userContextObj, setUserContextObj }}>
-        <DialogContext.Provider value={{ showDialog, setShowDialog }}>
-          <Routes>
-            <Route
-              path="/dashboard/*"
-              element={
-                <NavigationBar>
-                  <NavigationPane />
-                </NavigationBar>
-              }
-            />
-            <Route
-              path="/session/*"
-              element={
-                <Routes>
-                  <Route
-                    path="/signin"
-                    element={
-                      <StaticNavigationBar>
-                        <SignIn />
-                      </StaticNavigationBar>
-                    }
-                  />
-                  {/* ... */}
-                </Routes>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <NavigationBar>
-                  <Page404 />
-                </NavigationBar>
-              }
-            />
-          </Routes>
-        </DialogContext.Provider>
-      </UserContext.Provider>
-    </LocalizationProvider>
+    <QueryClientProvider client={queryClient}>
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <UserContext.Provider value={{ userContextObj, setUserContextObj }}>
+          <DialogContext.Provider value={{ showDialog, setShowDialog }}>
+            <Routes>
+              <Route
+                path="/dashboard/*"
+                element={
+                  <NavigationBar>
+                    <NavigationPane />
+                  </NavigationBar>
+                }
+              />
+              <Route
+                path="/session/*"
+                element={
+                  <Routes>
+                    <Route
+                      path="/signin"
+                      element={
+                        <StaticNavigationBar>
+                          <SignIn />
+                        </StaticNavigationBar>
+                      }
+                    />
+                    {/* ... */}
+                  </Routes>
+                }
+              />
+              <Route
+                path="*"
+                element={
+                  <NavigationBar>
+                    <Page404 />
+                  </NavigationBar>
+                }
+              />
+            </Routes>
+          </DialogContext.Provider>
+        </UserContext.Provider>
+      </LocalizationProvider>
+    </QueryClientProvider>
   );
 }
 
