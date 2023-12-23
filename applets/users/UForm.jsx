@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { BiErrorCircle } from "react-icons/bi";
 
 function UForm({ createRole }) {
-  const userRoles = ["superadmin", "admin", "volunteer", "community"];
+  const userRoles = ["superadmin", "admin", "volunteer"];
   const formRef = useRef();
   const navigate = useNavigate();
   const { setShowDialog } = useContext(DialogContext);
@@ -42,7 +42,7 @@ function UForm({ createRole }) {
       role: {
         type: "string",
         title: "User role",
-        enum: ["superadmin", "admin", "volunteer", "community"],
+        enum: ["superadmin", "admin", "volunteer"],
       },
       profurl: {
         type: "string",

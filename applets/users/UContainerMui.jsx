@@ -77,9 +77,6 @@ function UContainerMui({ onlyRenderRole }) {
                 <b>Phone</b>
               </TableCell>
               <TableCell>
-                <b>Donations</b>
-              </TableCell>
-              <TableCell>
                 <b>Created&nbsp;At&nbsp;(IST)</b>
               </TableCell>
               <TableCell>
@@ -122,7 +119,6 @@ function UContainerMui({ onlyRenderRole }) {
                   </a>
                 </TableCell>
                 <TableCell>{row.phone}</TableCell>
-                <TableCell>₹ {row.donations}</TableCell>
                 <TableCell className="whitespace-nowrap">
                   {new Date(row.created_at).toLocaleString("en-in", {
                     timeZone: "Asia/Kolkata",

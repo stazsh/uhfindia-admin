@@ -9,7 +9,6 @@ import { VscFeedback } from "react-icons/vsc";
 import VApplications from "../applets/applications/VApplications";
 import Fundraising from "../applets/fundraising/Fundraising";
 import Transactions from "../applets/transactions/Transactions";
-import UCommunity from "../applets/users/UCommunity";
 import UVolunteers from "../applets/users/UVolunteers";
 import UAdmininstrators from "../applets/users/UAdmininstrators";
 import Feedback from "../applets/feedback/Feedback";
@@ -67,13 +66,6 @@ export const paneTopElements = [
     icon: <SlPeople fontSize={26} />,
     navlink: "/dashboard/users",
     tabs: [
-      {
-        title: "Community",
-        navlink: function () {
-          return "/dashboard/users/community/*";
-        },
-        element: <UCommunity />,
-      },
       {
         title: "Volunteers",
         navlink: function () {

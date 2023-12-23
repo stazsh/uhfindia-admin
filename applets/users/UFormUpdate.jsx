@@ -204,11 +204,7 @@ export function UFormUpdate({ updateRole }) {
               role: {
                 type: "string",
                 title: "User role",
-                enum: ["superadmin", "admin", "volunteer", "community"],
-              },
-              donations: {
-                type: "number",
-                title: "Net worth of donations (in INR)",
+                enum: ["superadmin", "admin", "volunteer"],
               },
               allow_access: {
                 type: "boolean",
@@ -250,9 +246,6 @@ export function UFormUpdate({ updateRole }) {
                 (value, key, collection) =>
                   hierarchy[value] >= hierarchy[userContextObj.role]
               ),
-            },
-            donations: {
-              "ui:readonly": true,
             },
             allow_access: {
               "ui:widget": "radio",

@@ -113,7 +113,7 @@ function UpdateSelfForm() {
               role: {
                 type: "string",
                 title: "Role",
-                enum: ["superadmin", "admin", "volunteer", "community"],
+                enum: ["superadmin", "admin", "volunteer"],
               },
               donations: {
                 type: "number",
