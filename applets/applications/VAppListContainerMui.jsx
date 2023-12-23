@@ -11,51 +11,28 @@ import { DialogContext } from "../../context/DialogContext";
 import { axiosInstance } from "../../api/axiosConfig";
 import {
   UTIL_hideDialog,
-  UTIL_showAlertDialog,
   UTIL_showLoadingDialog,
 } from "../../utils/muiDialogUtils";
-import { BiErrorCircle } from "react-icons/bi";
 import { statusShieldSelector } from "../../components/StatusShields";
+import { useQuery } from "@tanstack/react-query";
 
 function VAppListContainerMui() {
   const navigate = useNavigate();
   const { setShowDialog } = React.useContext(DialogContext);
-  const [applicationList, setApplicationList] = React.useState([]);
 
-  React.useEffect(() => {
-    async function getVApplications() {
-      try {
-        UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
-        const res = await axiosInstance.get("/vapplications", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
-          },
-        });
-
-        console.log(res.data.payload);
-
-        UTIL_hideDialog(setShowDialog);
-        setApplicationList(res.data.payload);
-      } catch (e) {
-        console.error(e);
-        UTIL_showAlertDialog(
-          setShowDialog,
-          <>
-            <div className="flex flex-row flex-start">
-              <BiErrorCircle fontSize={30} className="inline-block mr-4" />
-              An unexpected error occured
-            </div>
-            <div>
-              <div className="m-2" />
-              <code>{e.response.data.message || e.message}</code>
-            </div>
-          </>
-        );
-      }
-    }
-
-    getVApplications();
-  }, []);
+  const { status, data, error, isFetching, refetch } = useQuery({
+    queryKey: ["vapplications"],
+    queryFn: async () => {
+      UTIL_showLoadingDialog(
+        setShowDialog,
+        "Fetching volunteer applications..."
+      );
+      const res = await axiosInstance.get("/vapplications");
+      console.log(res);
+      UTIL_hideDialog(setShowDialog);
+      return res;
+    },
+  });
 
   return (
     <div className="relative flex-grow shrink-0">
@@ -84,40 +61,41 @@ function VAppListContainerMui() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {applicationList.map((row) => (
-              <TableRow
-                className="group cursor-pointer hover:bg-slate-100"
-                key={row._id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                onClick={() =>
-                  navigate(`/dashboard/volunteer-applications/${row._id}`)
-                }
-              >
-                <TableCell component="th" scope="row">
-                  <div className="flex whitespace-nowrap flex-row place-items-center">
-                    <code>{row._id}</code>
-                  </div>
-                </TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>
-                  <a
-                    className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
-                    href={`mailto:${row.user_email}`}
-                  >
-                    {row.email}
-                  </a>
-                </TableCell>
-                <TableCell>{row.phone}</TableCell>
-                <TableCell className="whitespace-nowrap">
-                  {new Date(row.created_at).toLocaleString("en-in", {
-                    timeZone: "Asia/Kolkata",
-                  })}
-                </TableCell>
-                <TableCell>
-                  {statusShieldSelector[row.application_status.toLowerCase()]}
-                </TableCell>
-              </TableRow>
-            ))}
+            {data &&
+              data.data.payload.map((row) => (
+                <TableRow
+                  className="group cursor-pointer hover:bg-slate-100"
+                  key={row._id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  onClick={() =>
+                    navigate(`/dashboard/volunteer-applications/${row._id}`)
+                  }
+                >
+                  <TableCell component="th" scope="row">
+                    <div className="flex whitespace-nowrap flex-row place-items-center">
+                      <code>{row._id}</code>
+                    </div>
+                  </TableCell>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell>
+                    <a
+                      className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
+                      href={`mailto:${row.user_email}`}
+                    >
+                      {row.email}
+                    </a>
+                  </TableCell>
+                  <TableCell>{row.phone}</TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    {new Date(row.created_at).toLocaleString("en-in", {
+                      timeZone: "Asia/Kolkata",
+                    })}
+                  </TableCell>
+                  <TableCell>
+                    {statusShieldSelector[row.application_status.toLowerCase()]}
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>

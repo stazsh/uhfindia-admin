@@ -19,16 +19,17 @@ import { statusShieldSelector } from "../../components/StatusShields";
 import { useQuery } from "@tanstack/react-query";
 
 function TransactionsContainerMui() {
-  const navigate = useNavigate();
   const { setShowDialog } = React.useContext(DialogContext);
   const [selectedTx, setSelectedTx] = React.useState(null);
 
-  const usp = useSearchParams();
-
   const { status, data, error, isFetching, refetch } = useQuery({
     queryKey: ["transactions"],
-    queryFn: () => axiosInstance.get("/transactions"),
-    initialData: null,
+    queryFn: async () => {
+      UTIL_showLoadingDialog(setShowDialog, "Fetching transactions...");
+      const res = await axiosInstance.get("/transactions");
+      UTIL_hideDialog(setShowDialog);
+      return res;
+    },
   });
 
   React.useEffect(() => {
