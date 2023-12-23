@@ -218,6 +218,7 @@ function FundraisingForm({ createMode }) {
               title: {
                 type: "string",
                 title: "Fundraiser title",
+                maxLength: 40,
               },
               description: {
                 type: "string",
