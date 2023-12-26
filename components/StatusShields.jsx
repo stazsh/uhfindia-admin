@@ -12,9 +12,19 @@ export const statusShieldSelector = {
   aborted: <Aborted />,
   invalid: <Invalid />,
   timeout: <Timeout />,
+  awaited: <Awaited />,
   _true: <Granted />,
   _false: <Denied />,
 };
+
+export function Awaited() {
+  return (
+    <div className="font-semibold h-fit w-fit px-2 py-0.5 flex place-items-center rounded-full text-amber-500 bg-amber-50 text-xs">
+      <HiClock fontSize={15} className="inline-block mr-2" />
+      <span>Granted</span>
+    </div>
+  );
+}
 
 export function Granted() {
   return (
