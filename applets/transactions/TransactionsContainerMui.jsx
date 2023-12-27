@@ -42,9 +42,9 @@ function TransactionsContainerMui() {
         <Table stickyHeader sx={{ minWidth: 800 }}>
           <TableHead>
             <TableRow>
-              <TableCell>
+              {/* <TableCell>
                 <b>Tracking ID</b>
-              </TableCell>
+              </TableCell> */}
               <TableCell>
                 <b>Order ID</b>
               </TableCell>
@@ -83,21 +83,28 @@ function TransactionsContainerMui() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   onClick={() => setSelectedTx(row)}
                 >
-                  <TableCell component="th" scope="row">
+                  {/* <TableCell component="th" scope="row">
                     <div className="flex whitespace-nowrap flex-row place-items-center">
                       <code>{row.txobj.tracking_id}</code>
                     </div>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell component="th" scope="row">
                     <div className="flex whitespace-nowrap flex-row place-items-center">
+                      {row.testtx && (
+                        <span className="text-blue-500 font-black">
+                          [T]&nbsp;
+                        </span>
+                      )}
                       <span className="p-0.5 px-2 text-xs bg-neutral-200 rounded-full">
-                        {row.txobj.order_id.length > 15
+                        {row.txobj.order_id.length > 15 || row.testtx
                           ? row.txobj.order_id.substring(0, 12) + "..."
                           : row.txobj.order_id}
                       </span>
                     </div>
                   </TableCell>
-                  <TableCell>{row.txobj.billing_name || "-"}</TableCell>
+                  <TableCell className="whitespace-nowrap">
+                    {row.txobj.billing_name || "-"}
+                  </TableCell>
                   <TableCell>
                     <a
                       className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
@@ -110,10 +117,25 @@ function TransactionsContainerMui() {
                   <TableCell>
                     <code>{row.txobj.merchant_param1 || "-"}</code>
                   </TableCell>
-                  <TableCell>
-                    <span className="text-green-500 font-bold">
-                      ₹ {row.txobj.mer_amount || "-"}
-                    </span>
+                  <TableCell className="text-right">
+                    {!row.testtx && (
+                      <span className="text-green-500 font-bold whitespace-nowrap">
+                        ₹{" "}
+                        {Number(row.txobj.mer_amount).toLocaleString("en-IN", {
+                          compactDisplay: "long",
+                          minimumFractionDigits: 2,
+                        }) || "-"}
+                      </span>
+                    )}
+                    {row.testtx && (
+                      <span className="text-blue-500 font-bold whitespace-nowrap">
+                        ₹{" "}
+                        {Number(row.txobj.mer_amount).toLocaleString("en-IN", {
+                          compactDisplay: "long",
+                          minimumFractionDigits: 2,
+                        }) || "-"}
+                      </span>
+                    )}
                   </TableCell>
                   <TableCell className="whitespace-nowrap">
                     {row.txobj.trans_date || "-"}

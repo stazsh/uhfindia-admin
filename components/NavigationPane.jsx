@@ -104,7 +104,7 @@ function NavigationPane() {
                 className="text-white flex flex-row place-items-center box-border outline-none hover:bg-[#ffffff44] active:bg-slate-200 active:text-black transition-colors cursor-pointer p-3 rounded-xl"
               >
                 {i.icon}
-                <div className="pl-3 w-[200px] mob:hidden capitalize pr-2 pane-item-label text-sm text-inherit font-semibold">
+                <div className="pl-3 w-[100px] mob:hidden capitalize pr-2 pane-item-label text-sm text-inherit font-semibold">
                   {i.label}
                 </div>
               </div>
@@ -127,7 +127,7 @@ function NavigationPane() {
               className="text-white flex flex-row place-items-center box-border outline-none  hover:bg-[#ffffff44] active:bg-slate-200 active:text-black transition-colors cursor-pointer p-3 rounded-xl"
             >
               {i.icon}
-              <div className="pl-3 w-[200px] mob:hidden capitalize pr-2 pane-item-label text-sm text-inherit font-semibold overflow-hidden">
+              <div className="pl-3 w-[120px] mob:hidden capitalize pr-2 pane-item-label text-sm text-inherit font-semibold overflow-hidden">
                 {i.label}
               </div>
             </div>
