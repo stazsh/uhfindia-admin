@@ -208,7 +208,7 @@ function FundraiserCampaignsContainer({ className }) {
                 <b>End date ETA (IST)</b>
               </TableCell>
               <TableCell>
-                <b>Created&nbsp;At (IST)</b>
+                <b>Progress</b>
               </TableCell>
               <TableCell>
                 <b>Last Updated (IST)</b>
@@ -243,11 +243,40 @@ function FundraiserCampaignsContainer({ className }) {
                     timeZone: "Asia/Kolkata",
                   })}
                 </TableCell>
-                <TableCell>{fuzzyFormatter(row.end_date)}</TableCell>
                 <TableCell className="whitespace-nowrap">
-                  {new Date(row.created_at).toLocaleString("en-in", {
-                    timeZone: "Asia/Kolkata",
-                  })}
+                  {fuzzyFormatter(row.end_date)}
+                </TableCell>
+                <TableCell className="whitespace-nowrap">
+                  <div className="flex flex-col w-[200px]">
+                    <span className="text-xs flex justify-between">
+                      <span>
+                        ₹{" "}
+                        {parseFloat(row.current_amount).toLocaleString(
+                          "en-IN",
+                          { minimumFractionDigits: 2 }
+                        )}{" "}
+                        raised
+                      </span>
+                      <span>
+                        ₹{" "}
+                        {parseFloat(row.target_amount).toLocaleString("en-IN", {
+                          minimumFractionDigits: 2,
+                        })}
+                      </span>
+                    </span>
+                    <div className="rounded-full h-[5px] w-full overflow-hidden bg-neutral-200">
+                      <div
+                        className="bg-blue-400 h-full rounded-r-full"
+                        style={{
+                          width: `${Math.floor(
+                            (parseFloat(row.current_amount) /
+                              parseFloat(row.target_amount)) *
+                              100
+                          )}%`,
+                        }}
+                      />
+                    </div>
+                  </div>
                 </TableCell>
                 <TableCell className="whitespace-nowrap">
                   {new Date(row.updated_at).toLocaleString("en-in", {
