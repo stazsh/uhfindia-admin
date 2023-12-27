@@ -100,7 +100,7 @@ function UpdateSelfForm() {
                 type: "string",
                 title: "New password",
                 description:
-                  "Ensure this field is vacant before saving if you don't want to change the current password. Otherwise, you may fill this field with the new password.",
+                  "Leave this field blank if you wish to keep your current password unchanged. If you intend to change your password, please enter the new password in this field. You will still have to fill in the current password to save the changes.",
               },
               phone: {
                 type: "string",
@@ -109,15 +109,15 @@ function UpdateSelfForm() {
               profurl: {
                 type: "string",
                 title: "Profile picture URL",
+                description:
+                  "Please input the CDN link of the profile picture you would like to set. Ensure the target image is in one of the browser-recognized image formats.",
               },
               role: {
                 type: "string",
                 title: "Role",
                 enum: ["superadmin", "admin", "volunteer"],
-              },
-              donations: {
-                type: "number",
-                title: "Net worth of Donations (in INR)",
+                description:
+                  "The self role-downgrader feature is provided for occasional convenience and is not recommended for dicretionary use. Kindly reach out to one of the administrators to facilitate an upgrade or downgrade of your user role.",
               },
               current_password: {
                 type: "string",
@@ -126,9 +126,6 @@ function UpdateSelfForm() {
             },
           }}
           uiSchema={{
-            donations: {
-              "ui:readonly": true,
-            },
             role: {
               "ui:enumDisabled": _.filter(
                 userRoles,
