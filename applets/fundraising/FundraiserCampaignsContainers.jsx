@@ -193,10 +193,10 @@ function FundraiserCampaignsContainer({ className }) {
           <TableHead>
             <TableRow>
               <TableCell>
-                <b>Title</b>
+                <b>Fundraiser Title</b>
               </TableCell>
               <TableCell>
-                <b>FID</b>
+                <b>Fundraiser Unique ID</b>
               </TableCell>
               <TableCell>
                 <b>Start date (IST)</b>
