@@ -205,7 +205,7 @@ function FundraiserCampaignsContainer({ className }) {
                 <b>End date (IST)</b>
               </TableCell>
               <TableCell>
-                <b>End date ETA (IST)</b>
+                <b>End date ETA</b>
               </TableCell>
               <TableCell>
                 <b>Progress</b>
@@ -247,7 +247,7 @@ function FundraiserCampaignsContainer({ className }) {
                   {fuzzyFormatter(row.end_date)}
                 </TableCell>
                 <TableCell className="whitespace-nowrap">
-                  <div className="flex flex-col w-[200px]">
+                  <div className="flex flex-col w-[250px]">
                     <span className="text-xs flex justify-between">
                       <span>
                         ₹{" "}
