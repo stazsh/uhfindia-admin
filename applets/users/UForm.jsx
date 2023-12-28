@@ -47,6 +47,7 @@ function UForm({ createRole }) {
       profurl: {
         type: "string",
         title: "Profile picture URL",
+        description: "You may leave this field empty.",
       },
     },
     required: ["name", "email", "password", "phone", "role"],
@@ -86,10 +87,7 @@ function UForm({ createRole }) {
           validator={validator}
           onSubmit={async () => {
             try {
-              UTIL_showLoadingDialog(
-                setShowDialog,
-                "Creating administrator's account..."
-              );
+              UTIL_showLoadingDialog(setShowDialog, "Creating account...");
               await axiosInstance.post(
                 "/users",
                 formRef.current.state.formData,
@@ -108,7 +106,7 @@ function UForm({ createRole }) {
                       fontSize={30}
                       className="inline-block mr-4"
                     />
-                    <span>Administrator's account created successfully</span>
+                    <span>Account created successfully</span>
                   </>,
                   () => navigate(-1)
                 );
