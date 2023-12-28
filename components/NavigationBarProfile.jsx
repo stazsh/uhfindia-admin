@@ -29,7 +29,7 @@ function NavigationBarProfile() {
 
             try {
               console.log(
-                await axiosInstance.post("/session/logout", undefined, {
+                await axiosInstance().post("/session/logout", undefined, {
                   headers: {
                     Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
                   },

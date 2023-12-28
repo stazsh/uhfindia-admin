@@ -145,7 +145,7 @@ function FundraiserCampaignsContainer({ className }) {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading fundraiser list...");
 
-        const res = await axiosInstance.get("/fundraisers", {
+        const res = await axiosInstance().get("/fundraisers", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },

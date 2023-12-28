@@ -15,8 +15,7 @@ import { Button } from "@mui/material";
 import { uid } from "uid";
 import { UserContext } from "../context/UserContext";
 
-const homeId = "pane-applications";
-const homeIdVolunteer = "pane-fundraising";
+const homeId = "pane-fundraising";
 
 function NavigationPane() {
   const navigate = useNavigate();
@@ -25,9 +24,7 @@ function NavigationPane() {
   const { showDialog } = useContext(DialogContext);
   const { userContextObj } = useContext(UserContext);
 
-  const [paneSelection, setPaneSelection] = useState(
-    userContextObj.role === "volunteer" ? homeIdVolunteer : homeId
-  );
+  const [paneSelection, setPaneSelection] = useState(homeId);
 
   useEffect(() => {
     for (var k = 0; k < gRouteArray.length; k++) {

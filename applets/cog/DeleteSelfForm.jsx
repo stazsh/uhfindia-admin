@@ -22,7 +22,7 @@ function DeleteSelfForm() {
         "Are you sure you want to delete this account with all its data?",
         async () => {
           try {
-            await axiosInstance.post("/cog", formRef.current.state.formData, {
+            await axiosInstance().post("/cog", formRef.current.state.formData, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
               },

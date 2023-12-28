@@ -25,7 +25,7 @@ function VAppListContainer({ className }) {
     async function getVApplications() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
-        const res = await axiosInstance.get("/vapplications", {
+        const res = await axiosInstance().get("/vapplications", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },

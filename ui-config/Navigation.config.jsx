@@ -16,21 +16,6 @@ import UserSettings from "../applets/cog/UserSettings";
 
 export const paneTopElements = [
   {
-    id: "pane-applications",
-    label: "Volunteer Applications",
-    icon: <LiaClipboardListSolid fontSize={26} />,
-    navlink: "/dashboard/volunteer-applications",
-    tabs: [
-      {
-        title: "Applications",
-        navlink: function () {
-          return "/dashboard/volunteer-applications/*";
-        },
-        element: <VApplications />,
-      },
-    ],
-  },
-  {
     id: "pane-fundraising",
     label: "Fundraising",
     icon: <BiDonateHeart fontSize={26} />,
@@ -42,6 +27,21 @@ export const paneTopElements = [
           return "/dashboard/fundraising/*";
         },
         element: <Fundraising />,
+      },
+    ],
+  },
+  {
+    id: "pane-applications",
+    label: "Volunteer Applications",
+    icon: <LiaClipboardListSolid fontSize={26} />,
+    navlink: "/dashboard/volunteer-applications",
+    tabs: [
+      {
+        title: "Applications",
+        navlink: function () {
+          return "/dashboard/volunteer-applications/*";
+        },
+        element: <VApplications />,
       },
     ],
   },

@@ -11,7 +11,7 @@ import "../styles/signin.css";
 import { miscNetError } from "../utils/miscNetworkError";
 import { UserContext } from "../context/UserContext";
 import { CgGlobeAlt } from "react-icons/cg";
-import { axiosInstance } from "../api/axiosConfig";
+import { axiosInstance, reconfigureAxios } from "../api/axiosConfig";
 
 function SigninBox() {
   const emailRef = useRef();
@@ -25,7 +25,7 @@ function SigninBox() {
     try {
       setLoginLoadState(true);
 
-      const res = await axiosInstance.post("/session/login", {
+      const res = await axiosInstance().post("/session/login", {
         email: emailRef.current.value,
         password: pwdRef.current.value,
       });
@@ -33,17 +33,10 @@ function SigninBox() {
       setUserContextObj(res.data.user_obj);
       localStorage.setItem("uhf_jwt", res.data.jwt);
       localStorage.setItem("uhf_jwt_ref", res.data.jwt_refresh);
+      reconfigureAxios();
 
       // TODO: timeout added for demonstrative purposes only, remove in production
-      setTimeout(
-        () =>
-          navigate(
-            res.data.user_obj.role !== "volunteer"
-              ? "/dashboard/volunteer-applications"
-              : "/dashboard/fundraising"
-          ),
-        3000
-      );
+      setTimeout(() => navigate("/dashboard/fundraising"));
     } catch (e) {
       console.error(e);
       setLoginLoadState(false);

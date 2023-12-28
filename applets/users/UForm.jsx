@@ -31,10 +31,6 @@ function UForm({ createRole }) {
         type: "string",
         title: "Primary Email",
       },
-      password: {
-        type: "string",
-        title: "New password",
-      },
       phone: {
         type: "string",
         title: "Phone",
@@ -50,7 +46,7 @@ function UForm({ createRole }) {
         description: "You may leave this field empty.",
       },
     },
-    required: ["name", "email", "password", "phone", "role"],
+    required: ["name", "email", "phone", "role"],
   };
 
   const uiSchema = {
@@ -59,12 +55,6 @@ function UForm({ createRole }) {
         userRoles,
         (value, key, collection) => value !== createRole
       ),
-    },
-    password: {
-      "ui:widget": "password",
-      "ui:options": {
-        inputType: "password",
-      },
     },
     email: {
       "ui:widget": "email",
@@ -88,7 +78,7 @@ function UForm({ createRole }) {
           onSubmit={async () => {
             try {
               UTIL_showLoadingDialog(setShowDialog, "Creating account...");
-              await axiosInstance.post(
+              await axiosInstance().post(
                 "/users",
                 formRef.current.state.formData,
                 {

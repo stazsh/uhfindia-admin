@@ -26,7 +26,7 @@ function TransactionsContainerMui() {
     queryKey: ["transactions"],
     queryFn: async () => {
       UTIL_showLoadingDialog(setShowDialog, "Fetching transactions...");
-      const res = await axiosInstance.get("/transactions");
+      const res = await axiosInstance().get("/transactions");
       UTIL_hideDialog(setShowDialog);
       return res;
     },

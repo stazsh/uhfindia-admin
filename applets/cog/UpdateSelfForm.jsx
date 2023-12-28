@@ -26,7 +26,7 @@ function UpdateSelfForm() {
     async function fetchFormData() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading user details...");
-        const res = await axiosInstance.get("/cog", {
+        const res = await axiosInstance().get("/cog", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },
@@ -166,13 +166,17 @@ function UpdateSelfForm() {
             setFormData(formRef.current.state.formData);
 
             try {
-              UTIL_showLoadingDialog(setShowDialog, "Updating fundraiser...");
+              UTIL_showLoadingDialog(setShowDialog, "Updating account...");
 
-              await axiosInstance.put("/cog", formRef.current.state.formData, {
-                headers: {
-                  Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
-                },
-              });
+              await axiosInstance().put(
+                "/cog",
+                formRef.current.state.formData,
+                {
+                  headers: {
+                    Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
+                  },
+                }
+              );
 
               setTimeout(() => {
                 UTIL_showAlertDialog(
@@ -182,8 +186,12 @@ function UpdateSelfForm() {
                       fontSize={30}
                       className="inline-block mr-4"
                     />
-                    <span>Account details updated succesfully</span>
-                  </>
+                    <span>
+                      Account details updated succesfully. You have been logged
+                      out. Re-login to continue.
+                    </span>
+                  </>,
+                  () => navigate("/session/signin")
                 );
               });
             } catch (e) {

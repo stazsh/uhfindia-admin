@@ -11,9 +11,12 @@ async function downloadExcelFile() {
   try {
     const url = "https://api.uhfindia.org/v1/dash/downloads/xlsx/vapplications";
 
-    const response = await axiosInstance.get("/downloads/xlsx/vapplications", {
-      responseType: "blob",
-    });
+    const response = await axiosInstance().get(
+      "/downloads/xlsx/vapplications",
+      {
+        responseType: "blob",
+      }
+    );
 
     const blob = new Blob([response.data], {
       type: response.headers["content-type"],

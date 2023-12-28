@@ -24,7 +24,7 @@ function FundraisingForm({ createMode }) {
     async function fetchFundraiser() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading data...");
-        const res = await axiosInstance.get("/fundraisers", {
+        const res = await axiosInstance().get("/fundraisers", {
           params: {
             filter: { _id: id },
           },
@@ -76,14 +76,18 @@ function FundraisingForm({ createMode }) {
     try {
       UTIL_showLoadingDialog(setShowDialog, "Updating fundraiser...");
 
-      await axiosInstance.put("/fundraisers", formRef.current.state.formData, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
-        },
-        params: {
-          filter: { _id: id },
-        },
-      });
+      await axiosInstance().put(
+        "/fundraisers",
+        formRef.current.state.formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
+          },
+          params: {
+            filter: { _id: id },
+          },
+        }
+      );
 
       setTimeout(() => {
         UTIL_showAlertDialog(
@@ -114,9 +118,15 @@ function FundraisingForm({ createMode }) {
     try {
       UTIL_showLoadingDialog(setShowDialog, "Creating new fundraiser...");
 
-      await axiosInstance.post("/fundraisers", formRef.current.state.formData, {
-        headers: { Authorization: "Bearer " + localStorage.getItem("uhf_jwt") },
-      });
+      await axiosInstance().post(
+        "/fundraisers",
+        formRef.current.state.formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
+          },
+        }
+      );
 
       setTimeout(() => {
         UTIL_showAlertDialog(
@@ -148,7 +158,7 @@ function FundraisingForm({ createMode }) {
     try {
       UTIL_showLoadingDialog(setShowDialog, "Deleting fundraiser...");
 
-      await axiosInstance.delete("/fundraisers", {
+      await axiosInstance().delete("/fundraisers", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
         },

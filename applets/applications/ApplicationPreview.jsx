@@ -31,7 +31,7 @@ function ApplicationPreview() {
     async function fetchFormData() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading application data...");
-        const res = await axiosInstance.get("/vapplications", {
+        const res = await axiosInstance().get("/vapplications", {
           params: {
             filter: { _id: id },
           },
@@ -129,7 +129,7 @@ function ApplicationPreview() {
             onClick={async () => {
               UTIL_showLoadingDialog(setShowDialog, "Deleting application...");
 
-              await axiosInstance.delete("/vapplications", {
+              await axiosInstance().delete("/vapplications", {
                 headers: {
                   Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
                 },
@@ -224,7 +224,7 @@ function ApplicationPreview() {
                 "Saving application status..."
               );
 
-              await axiosInstance.put(
+              await axiosInstance().put(
                 "/vapplications",
                 formRef.current.state.formData,
                 {

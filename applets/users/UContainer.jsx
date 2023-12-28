@@ -19,7 +19,7 @@ function UContainer({ className, onlyRenderRole }) {
   useEffect(() => {
     async function getUsers() {
       try {
-        const res = await axiosInstance.get("/users", {
+        const res = await axiosInstance().get("/users", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },

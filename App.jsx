@@ -41,7 +41,7 @@ function App() {
 
       if (refreshToken) {
         try {
-          const res = await axiosInstance.get("/session/reftoken", {
+          const res = await axiosInstance().get("/session/reftoken", {
             headers: {
               Authorization: `Bearer ${refreshToken}`,
             },

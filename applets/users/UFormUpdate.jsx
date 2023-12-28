@@ -30,7 +30,7 @@ export function UFormUpdate({ updateRole }) {
     async function fetchUser() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading user data...");
-        const res = await axiosInstance.get("/users", {
+        const res = await axiosInstance().get("/users", {
           params: {
             filter: { _id: id },
           },
@@ -48,7 +48,6 @@ export function UFormUpdate({ updateRole }) {
         setFormData({
           name: res.data.payload[0].name,
           email: res.data.payload[0].email,
-          password: "",
           phone: res.data.payload[0].phone,
           role: res.data.payload[0].role,
           profurl: res.data.payload[0].profurl,
@@ -87,7 +86,7 @@ export function UFormUpdate({ updateRole }) {
     try {
       UTIL_showLoadingDialog(setShowDialog, "Updating user...");
 
-      await axiosInstance.put("/users", formRef.current.state.formData, {
+      await axiosInstance().put("/users", formRef.current.state.formData, {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
         },
@@ -125,7 +124,7 @@ export function UFormUpdate({ updateRole }) {
     try {
       UTIL_showLoadingDialog(setShowDialog, "Deleting user...");
 
-      await axiosInstance.delete("/users", {
+      await axiosInstance().delete("/users", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
         },
@@ -189,10 +188,6 @@ export function UFormUpdate({ updateRole }) {
                 type: "string",
                 title: "Primary Email",
               },
-              password: {
-                type: "string",
-                title: "New password",
-              },
               phone: {
                 type: "string",
                 title: "Phone",
@@ -220,13 +215,6 @@ export function UFormUpdate({ updateRole }) {
               "ui:readonly": !isHAuthorised,
             },
             profurl: {
-              "ui:readonly": !isHAuthorised,
-            },
-            password: {
-              "ui:widget": "password",
-              "ui:options": {
-                inputType: "password",
-              },
               "ui:readonly": !isHAuthorised,
             },
             email: {

@@ -29,7 +29,7 @@ function VAppListContainerMui() {
         setShowDialog,
         "Fetching volunteer applications..."
       );
-      const res = await axiosInstance.get("/vapplications");
+      const res = await axiosInstance().get("/vapplications");
       console.log(res);
       UTIL_hideDialog(setShowDialog);
       return res;

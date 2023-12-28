@@ -25,7 +25,7 @@ function FeedbackContainerMui() {
     async function getFeedbackList() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading feedback list...");
-        const res = await axiosInstance.get("/feedback", {
+        const res = await axiosInstance().get("/feedback", {
           headers: {
             Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
           },

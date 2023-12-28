@@ -23,7 +23,7 @@ function FeedbackForm() {
     async function fetchFeedback() {
       try {
         UTIL_showLoadingDialog(setShowDialog, "Loading details...");
-        const res = await axiosInstance.get("/feedback", {
+        const res = await axiosInstance().get("/feedback", {
           params: {
             filter: {
               _id: id,
@@ -72,7 +72,7 @@ function FeedbackForm() {
             onClick={async () => {
               UTIL_showLoadingDialog(setShowDialog, "Removing item...");
 
-              await axiosInstance.delete("/feedback", {
+              await axiosInstance().delete("/feedback", {
                 headers: {
                   Authorization: "Bearer " + localStorage.getItem("uhf_jwt"),
                 },
