@@ -48,12 +48,7 @@ function App() {
           });
           setUserContextObj(res.data.user_obj);
           localStorage.setItem("uhf_jwt", res.data.jwt);
-          if (location.pathname == "/")
-            navigate(
-              res.data.user_obj.role !== "volunteer"
-                ? "/dashboard/volunteer-applications"
-                : "/dashboard/fundraising"
-            );
+          if (location.pathname == "/") navigate("/dashboard/fundraising");
         } catch (e) {
           goToSignin();
         }
