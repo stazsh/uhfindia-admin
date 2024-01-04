@@ -28,7 +28,7 @@ function NavigationBar({ children }) {
         </div>
         <div className="space-x-4 mob:space-x-0 flex items-center justify-end">
           {[
-            { label: "Homepage", hyperlink: "https://uhfindia.org" },
+            { label: "Home", hyperlink: "https://uhfindia.org" },
             { label: "Donate", hyperlink: "https://uhfindia.org/donate" },
             /* { label: "About", hyperlink: "/lmfao" },
             { label: "Our Work", hyperlink: "/hahahaha" },
