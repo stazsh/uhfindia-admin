@@ -21,7 +21,7 @@ function NavigationBar({ children }) {
             />
             <span className="text-white text-2xl mob:hidden">
               United
-              <span className="font-black"> H.O.P.E. </span>
+              <span className="font-black"> H.O.P.E </span>
               Foundation
             </span>
           </div>
