@@ -46,8 +46,8 @@ export function Success() {
 
 export function Timeout() {
   return (
-    <div className="font-semibold h-fit w-fit px-2 py-0.5 flex place-items-center rounded-full text-green-500 bg-green-50 text-xs">
-      <RiCheckboxCircleFill fontSize={15} className="inline-block mr-2" />
+    <div className="font-semibold h-fit w-fit px-2 py-0.5 flex place-items-center rounded-full text-amber-500 bg-amber-50 text-xs">
+      <RiCloseCircleFill fontSize={15} className="inline-block mr-2" />
       <span>Timeout</span>
     </div>
   );
