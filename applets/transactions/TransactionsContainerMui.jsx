@@ -103,17 +103,37 @@ function TransactionsContainerMui() {
                     </div>
                   </TableCell>
                   <TableCell className="whitespace-nowrap">
-                    {row.txobj.billing_name || "-"}
+                    {row.txobj.billing_name.length
+                      ? row.txobj.billing_name
+                      : row.mp5
+                      ? row.mp5.name
+                      : "-"}
                   </TableCell>
                   <TableCell>
                     <a
                       className="text-blue-600 hover:text-blue-400 transition-all border-transparent border-b hover:border-blue-400"
-                      href={`mailto:${row.txobj.billing_email}`}
+                      href={`mailto:${
+                        row.txobj.billing_email.length
+                          ? row.txobj.billing_email
+                          : row.mp5
+                          ? row.mp5.email
+                          : "-"
+                      }`}
                     >
-                      {row.txobj.billing_email || "-"}
+                      {row.txobj.billing_email.length
+                        ? row.txobj.billing_email
+                        : row.mp5
+                        ? row.mp5.email
+                        : "-"}
                     </a>
                   </TableCell>
-                  <TableCell>{row.txobj.billing_tel || "-"}</TableCell>
+                  <TableCell>
+                    {row.txobj.billing_tel.length
+                      ? row.txobj.billing_tel
+                      : row.mp5
+                      ? row.mp5.phone
+                      : "-"}
+                  </TableCell>
                   <TableCell>
                     <code>{row.txobj.merchant_param1 || "-"}</code>
                   </TableCell>
