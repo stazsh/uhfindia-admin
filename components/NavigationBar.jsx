@@ -30,6 +30,7 @@ function NavigationBar({ children }) {
           {[
             { label: "Home", hyperlink: "https://uhfindia.org" },
             { label: "Donate", hyperlink: "https://uhfindia.org/donate" },
+            { label: "Content Management System", hyperlink: "https://uhf-cms.vercel.app" },
             /* { label: "About", hyperlink: "/lmfao" },
             { label: "Our Work", hyperlink: "/hahahaha" },
             { label: "Gallery", hyperlink: "/HaHAAHAHAHAAAAHHAHAa" },
