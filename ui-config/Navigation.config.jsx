@@ -13,6 +13,8 @@ import UVolunteers from "../applets/users/UVolunteers";
 import UAdmininstrators from "../applets/users/UAdmininstrators";
 import Feedback from "../applets/feedback/Feedback";
 import UserSettings from "../applets/cog/UserSettings";
+import { IoReceiptOutline } from "react-icons/io5";
+import Receipt from "../applets/receipt/Receipt";
 
 export const paneTopElements = [
   {
@@ -94,6 +96,21 @@ export const paneTopElements = [
           return "/dashboard/feedback/*";
         },
         element: <Feedback />,
+      },
+    ],
+  },
+  {
+    id: "pane-receipt",
+    label: "Generate Receipt",
+    icon: <IoReceiptOutline fontSize={26} />,
+    navlink: "/dashboard/receipt",
+    tabs: [
+      {
+        title: "Receipt",
+        navlink: function () {
+          return "/dashboard/receipt/*";
+        },
+        element: <Receipt />,
       },
     ],
   },

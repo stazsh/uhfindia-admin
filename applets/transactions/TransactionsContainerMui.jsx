@@ -95,6 +95,11 @@ function TransactionsContainerMui() {
                           [T]&nbsp;
                         </span>
                       )}
+                      {row.cashtx && (
+                        <span className="text-blue-500 font-black">
+                          [M]&nbsp;
+                        </span>
+                      )}
                       <span className="p-0.5 px-2 text-xs bg-neutral-200 rounded-full">
                         {row.txobj.order_id.length > 15 || row.testtx
                           ? row.txobj.order_id.substring(0, 12) + "..."

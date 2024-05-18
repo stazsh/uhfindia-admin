@@ -141,7 +141,7 @@ function NavigationPane() {
               .getElementById("pane-retractor")
               .classList.toggle("rotatecw-180");
           }}
-          className="absolute mob:hidden right-0 translate-x-1/2 cursor-pointer shadow-md shadow-[#00000030] shado ring-blue-500 hover:ring-4 transition duration-300 p-2 bg-white text-blue-600 top-1/2 -translate-y-1/2 rounded-full"
+          className="absolute mob:hidden right-0 translate-x-[140%] border ring-1 cursor-pointer shadow-md shadow-[#00000030] shado ring-blue-500 hover:ring-4 transition duration-300 p-2 bg-white text-blue-600 top-1/2 -translate-y-1/2 rounded-full"
         >
           <FaChevronRight
             id="pane-retractor"
