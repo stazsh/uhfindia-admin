@@ -283,6 +283,15 @@ function FundraisingForm({ createMode }) {
                 format: "date-time",
               },
             },
+            required: [
+              "category",
+              "current_amount",
+              "target_amount",
+              "title",
+              "description",
+              "start_date",
+              "end_date",
+            ],
           }}
           uiSchema={{
             "ui:submitButtonOptions": {
