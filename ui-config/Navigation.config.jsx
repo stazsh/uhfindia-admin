@@ -32,7 +32,7 @@ export const paneTopElements = [
       },
     ],
   },
-  {
+  /* {
     id: "pane-applications",
     label: "Volunteer Applications",
     icon: <LiaClipboardListSolid fontSize={26} />,
@@ -46,7 +46,7 @@ export const paneTopElements = [
         element: <VApplications />,
       },
     ],
-  },
+  }, */
   {
     id: "pane-transactions",
     label: "Transactions",
@@ -84,7 +84,7 @@ export const paneTopElements = [
       },
     ],
   },
-  {
+  /* {
     id: "pane-feedback",
     label: "Feedback",
     icon: <VscFeedback fontSize={26} />,
@@ -98,7 +98,7 @@ export const paneTopElements = [
         element: <Feedback />,
       },
     ],
-  },
+  }, */
   {
     id: "pane-receipt",
     label: "Generate Receipt",
