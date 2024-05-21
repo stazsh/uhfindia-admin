@@ -60,7 +60,7 @@ function Receipt() {
   const generateReceipt = async () => {
     try {
       const formData = formRef.current.state.formData;
-      const res = await axios.post("http://localhost:5000/v1/dash/receipt", {
+      const res = await axiosInstance().post("/receipt", {
         ...formData,
         fundraiser_id: formData.fundraiser_id.split("|")[1].trim(),
       });
